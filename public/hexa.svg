@@ -1,0 +1,61 @@
+<svg
+        className="h-72 w-72"
+        viewBox="0 0 200 200"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        {/* Smallest */}
+        <polygon
+          points="100,10 190,75 155,180 45,180 10,75"
+          fill="#3b82f6"
+          fillOpacity="0.2"
+          stroke="#3b82f6"
+          strokeWidth="1"
+          transform="translate(80 80) scale(0.2)"
+        />
+
+        <polygon
+          points="100,10 190,75 155,180 45,180 10,75"
+          fill="#3b82f6"
+          fillOpacity="0.3"
+          stroke="#3b82f6"
+          strokeWidth="1"
+          transform="translate(60 60) scale(0.4)"
+        />
+
+        <polygon
+          points="100,10 190,75 155,180 45,180 10,75"
+          fill="#0062ff7c"
+          fillOpacity="0.4"
+          stroke="#0062ff7a"
+          strokeWidth="1"
+          transform="translate(40 40) scale(0.6)"
+        />
+
+        <polygon
+          points="100,10 190,75 155,180 45,180 10,75"
+          fill="#3b82f6"
+          fillOpacity="0.5"
+          stroke="#3b82f6"
+          strokeWidth="1"
+          transform="translate(20 20) scale(0.8)"
+        />
+
+        {/* Outer */}
+        <polygon
+          points="100,10 190,75 155,180 45,180 10,75"
+          fill="#3b82f6"
+          fillOpacity="0.1"
+          stroke="#3b82f6"
+          strokeWidth="1"
+          transform="translate(0 0) scale(1)"
+        />
+
+        {/* Center */}
+        <polygon
+          points="100,30 170,75 140,160 60,160 30,75"
+          fill="#2563eb"
+          fillOpacity="0.8"
+          stroke="#2563eb"
+          strokeWidth="2"
+        />
+      </svg>
