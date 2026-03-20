@@ -52,7 +52,9 @@ export default function SignupPage(){
       <Spline
         scene="https://prod.spline.design/tM5aVTqwc4uR8a2Q/scene.splinecode" 
       />
-      <div className='absolute top-80 left-140 border border-white/10 w-100 h-110 rounded-lg bg-black/30 p-8 backdrop-blur-xs'>
+      <div className='absolute top-1/8 left-1/6 border border-white/10 w-100 h-160 rounded-lg bg-black/40 p-8 backdrop-blur-xs'>
+      <img className='w-20 h-25 object-cover ml-33 -mb-5' src="/uplyft.svg" alt="" />
+      <h1 className='text-xl font-serif text-gray-800 ml-20'>Create New Account</h1>
       {loading ? "Signup" : ""}
         <div className='text-white flex flex-col'>Username
         

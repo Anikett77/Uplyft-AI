@@ -50,9 +50,10 @@ export default function LoginPage(){
             </div>
 
             {/* Form */}
-            <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border border-white/10 w-96 rounded-lg bg-black/30 p-8 backdrop-blur-sm'>
+            <div className='absolute top-1/8 left-1/6 border border-white/10 w-100 h-160 rounded-lg bg-black/40 p-8 backdrop-blur-xs'>
+      <img className='w-20 h-25 object-cover ml-33 -mb-5' src="/uplyft.svg" alt="" />
 
-                <h2 className='text-white text-2xl font-bold mb-6 text-center'>Welcome Back</h2>
+                <h2 className='text-white text-2xl font-bold mb-3 text-center'>Welcome Back</h2>
 
                 <div className='text-white flex flex-col'>
                     Email Address
