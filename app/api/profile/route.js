@@ -1,8 +1,8 @@
 // app/api/profile/route.js
 import { NextResponse } from "next/server";
-import { connect } from "@/dbConfig/dbConfig";
-import User from "@/models/userModel";
-import { getDataFromToken } from "@/helpers/getDataFromToken";
+import { connect } from "@/app/dbConfig/dbConfig";
+import User from "@/app/models/userModel";
+import { getDataFromToken } from "@/app/helpers/getDataFromToken";
 
 connect();
 
