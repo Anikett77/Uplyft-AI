@@ -1,7 +1,9 @@
 import React from 'react'
 import Spline from '@splinetool/react-spline';
+import { useRouter } from 'next/navigation';
 
 const HeroSection = () => {
+  const router = useRouter();
   return (
     <div id='home' className='relative w-full h-screen '>
       <Spline className='absolute top-0 left-0 w-full h-full' 
@@ -17,8 +19,8 @@ const HeroSection = () => {
         <h3 className='text-gray-300 mt-15 text-lg'>Analyze your resume, identify skill gaps, generate personalized career roadmaps, <br /> practice AI mock interviews, and land your dream job with intelligent guidance.</h3>
         </span>
         <div className='grid grid-cols-2 gap-10 mt-7 text-white'>
-        <button className='from-purple-700 to-blue-600 bg-linear-to-l rounded-xl'>Analyze Resume</button>
-        <button className='border border-white rounded-xl p-2'>Get Career Roadmap</button>
+        <button className='from-purple-700 to-blue-600 bg-linear-to-l rounded-xl' onClick={() => router.push('/signup')}>Analyze Resume</button>
+        <button className='border border-white rounded-xl p-2'onClick={() => router.push('/signup')} >Get Career Roadmap</button>
         </div>
       </div>
       

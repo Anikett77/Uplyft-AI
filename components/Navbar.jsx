@@ -1,6 +1,8 @@
 import React from "react";
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
+  const router = useRouter();
   return (
     <nav className="w-full flex items-center justify-between px-8 py-4 text-white">
 
@@ -19,8 +21,9 @@ const Navbar = () => {
 
       {/* Auth Buttons */}
       <div className="flex gap-4 items-center">
-        <button className="hover:text-gray-300">Sign In</button>
-        <button className="from-purple-700 to-blue-600 bg-linear-to-l px-4 py-2 rounded-lg hover:bg-blue-600">
+        <button className="hover:text-gray-300"
+        onClick={() => router.push('/signup')}>Sign In</button>
+        <button className="from-purple-700 to-blue-600 bg-linear-to-l px-4 py-2 rounded-lg hover:bg-blue-600" onClick={() => router.push('/signup')}>
           Get Started
         </button>
       </div>
