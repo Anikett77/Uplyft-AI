@@ -28,191 +28,232 @@ const NAV_ITEMS = [
 
 export function Dashboard() {
 
-    const router = useRouter();
-    const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(true);
+  const router = useRouter();
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-useEffect(() => {
-  axios.get("/api/users/me")
-    .then(res => setUser(res.data.data))
-    .catch(() => router.push("/login"))
-    .finally(() => setLoading(false));
-}, []);
+  // ── ORIGINAL BACKEND CODE (untouched) ──
+  useEffect(() => {
+    axios.get("/api/users/me")
+      .then(res => setUser(res.data.data))
+      .catch(() => router.push("/login"))
+      .finally(() => setLoading(false));
+  }, []);
 
-  // ── User ke skills se progress bars banate hain
-  // Abhi sab 0 hai — baad mein skill gap analysis se update hoga
   const skillScores = (user?.skills || []).slice(0, 6).map(skill => ({
     name: skill,
-    score: 0, // baad mein API se aayega
+    score: 0,
   }));
 
-  // ── Stat cards ka data
   const stats = [
-    { label: "ATS Score",       value: "0",  suffix: "/100", color: "text-blue-400",   sub: "Upload resume first",    action: "resume" },
-    { label: "Interview Score", value: "0",  suffix: "/100", color: "text-purple-400", sub: "No mock done yet",       action: "interview" },
-    { label: "Skill Match",     value: "0",  suffix: "%",    color: "text-green-400",  sub: "Analyze skills first",   action: "skillgap" },
-    { label: "Tasks Done",      value: "0",  suffix: "/10",  color: "text-orange-400", sub: "Start your roadmap",     action: "roadmap" },
+    { label: "ATS Score",       value: "0", suffix: "/100", color: "text-sky-400",     sub: "Upload resume first",  action: "resume",    border: "border-sky-500/20",     bg: "bg-sky-500/5",     bar: "from-sky-400 to-cyan-400" },
+    { label: "Interview Score", value: "0", suffix: "/100", color: "text-violet-400",  sub: "No mock done yet",     action: "interview", border: "border-violet-500/20",  bg: "bg-violet-500/5",  bar: "from-violet-400 to-purple-400" },
+    { label: "Skill Match",     value: "0", suffix: "%",    color: "text-emerald-400", sub: "Analyze skills first", action: "skillgap",  border: "border-emerald-500/20", bg: "bg-emerald-500/5", bar: "from-emerald-400 to-teal-400" },
+    { label: "Tasks Done",      value: "0", suffix: "/10",  color: "text-rose-400",    sub: "Start your roadmap",   action: "roadmap",   border: "border-rose-500/20",    bg: "bg-rose-500/5",    bar: "from-rose-400 to-pink-400" },
   ];
 
-  // ── Recent activity — starting state, sab pending
   const activities = [
-    { title: "Profile Created",      status: "done",    time: "Just now" },
-    { title: "Resume Analyzed",      status: "pending", time: "Pending" },
-    { title: "Skill Gap Analysis",   status: "pending", time: "Pending" },
-    { title: "Mock Interview #1",    status: "pending", time: "Pending" },
-    { title: "Roadmap Generated",    status: "pending", time: "Pending" },
+    { title: "Profile Created",    status: "done",    time: "Just now" },
+    { title: "Resume Analyzed",    status: "pending", time: "Pending" },
+    { title: "Skill Gap Analysis", status: "pending", time: "Pending" },
+    { title: "Mock Interview #1",  status: "pending", time: "Pending" },
+    { title: "Roadmap Generated",  status: "pending", time: "Pending" },
   ];
 
-  // ── ATS breakdown — sab — jab tak resume upload nahi hota
   const atsBreakdown = [
-    { label: "Keywords",   value: "—" },
-    { label: "Formatting", value: "—" },
-    { label: "Skills",     value: "—" },
-    { label: "Experience", value: "—" },
+    { label: "Keywords",   value: "—", color: "text-sky-400",     border: "border-sky-500/20",     bg: "bg-sky-500/5",     bar: "from-sky-400 to-cyan-400" },
+    { label: "Formatting", value: "—", color: "text-violet-400",  border: "border-violet-500/20",  bg: "bg-violet-500/5",  bar: "from-violet-400 to-purple-400" },
+    { label: "Skills",     value: "—", color: "text-emerald-400", border: "border-emerald-500/20", bg: "bg-emerald-500/5", bar: "from-emerald-400 to-teal-400" },
+    { label: "Experience", value: "—", color: "text-rose-400",    border: "border-rose-500/20",    bg: "bg-rose-500/5",    bar: "from-rose-400 to-pink-400" },
+  ];
+
+  const skillBarColors = [
+    "from-sky-400 to-cyan-400",
+    "from-violet-400 to-purple-400",
+    "from-emerald-400 to-teal-400",
+    "from-rose-400 to-pink-400",
+    "from-amber-400 to-orange-400",
+    "from-indigo-400 to-blue-400",
   ];
 
   return (
-    <div className="space-y-5">
+    <div className="min-h-screen bg-[#0b0d12] relative overflow-hidden px-4 py-14">
 
-      {/* ── Welcome Banner ── */}
-      <div className="rounded-2xl bg-gradient-to-r from-blue-600/15 to-purple-600/8 border border-blue-500/20 p-5 flex justify-between items-center">
-        <div>
-          <h2 className="text-xl font-bold text-white">
-            Hey {user?.fullName?.split(" ")[0] || "there"} 👋
-          </h2>
-          <p className="text-white/40 text-sm mt-1">
-            Target: <span className="text-blue-400 font-medium">{user?.targetRole || "Not set"}</span>
-            &nbsp;·&nbsp;
-            Skills: <span className="text-purple-400 font-medium">{user?.skills?.length || 0}</span>
-            &nbsp;·&nbsp;
-            Keep going!
+      {/* ── Background orbs — exact Skill Gap style ── */}
+      <div className="absolute -top-32 -right-24 w-[400px] h-[400px] rounded-full bg-violet-700 opacity-[0.10] blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 -left-24 w-[350px] h-[350px] rounded-full bg-sky-700 opacity-[0.08] blur-3xl pointer-events-none" />
+      <div className="absolute top-1/2 right-1/4 w-[250px] h-[250px] rounded-full bg-emerald-700 opacity-[0.07] blur-3xl pointer-events-none" />
+      <div className="absolute top-1/3 left-10 w-[200px] h-[200px] rounded-full bg-rose-700 opacity-[0.06] blur-3xl pointer-events-none" />
+
+      {/* ── Dot grid ── */}
+      <div className="absolute inset-0 pointer-events-none"
+        style={{ backgroundImage: "radial-gradient(rgba(255,255,255,0.035) 1px, transparent 1px)", backgroundSize: "28px 28px" }} />
+
+      <div className="relative z-10 max-w-6xl mx-auto space-y-5">
+
+        {/* ── Header ── */}
+        <div className="mb-8">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] tracking-widest uppercase text-white/30 font-medium mb-4">
+            ✦ AI Powered
+          </span>
+          <h1 className="text-4xl font-black text-white tracking-tight">
+            Career{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-sky-400">
+              Dashboard
+            </span>
+          </h1>
+          <p className="mt-2 text-[13px] text-white/30 font-light">
+            Hey <span className="text-violet-400 font-medium">{user?.fullName?.split(" ")[0] || "there"} 👋</span>
+            &nbsp;·&nbsp; Target: <span className="text-sky-400 font-medium">{user?.targetRole || "Not set"}</span>
+            &nbsp;·&nbsp; Skills: <span className="text-emerald-400 font-medium">{user?.skills?.length || 0}</span>
           </p>
         </div>
-        <div className="text-right">
-          <p className="text-xs text-white/30 mb-1">Career Readiness</p>
-          {/* Ye 0% hai abhi — baad mein AI calculate karega */}
-          <p className="text-3xl font-bold text-green-400">0%</p>
+
+        {/* ── Welcome banner ── */}
+        <div className="relative rounded-2xl border border-violet-500/20 bg-violet-500/5 p-5 flex justify-between items-center overflow-hidden">
+          <div className="absolute top-0 left-4 right-4 h-[2px] rounded-full bg-gradient-to-r from-violet-400 to-sky-400" />
+          <div>
+            <p className="text-white/40 text-[11px] uppercase tracking-widest mb-1">Overall Progress</p>
+            <p className="text-white font-bold text-base">Career Readiness Overview</p>
+            <p className="text-white/25 text-xs mt-1">Complete all sections to boost your score</p>
+          </div>
+          <div className="text-right">
+            <p className="text-xs text-white/30 mb-1">Career Readiness</p>
+            <p className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-sky-400">0%</p>
+            <p className="text-white/25 text-[11px]">compatibility</p>
+          </div>
         </div>
-      </div>
 
-      {/* ── Stat Cards ── */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-        {stats.map((stat) => (
-          <button
-            key={stat.label}
-            onClick={() => setActive(stat.action)}
-            className="text-left rounded-2xl border border-white/[0.06] bg-white/[0.03] p-5 hover:bg-white/[0.06] hover:border-white/10 transition-all"
-          >
-            <p className="text-xs text-white/35 uppercase tracking-wider mb-2">{stat.label}</p>
-            <p className={`text-3xl font-bold ${stat.color}`}>
-              {stat.value}
-              <span className="text-base text-white/25">{stat.suffix}</span>
-            </p>
-            <p className="text-xs text-white/25 mt-1">{stat.sub}</p>
-          </button>
-        ))}
-      </div>
+        {/* ── Stat Cards ── */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          {stats.map((stat) => (
+            <button
+              key={stat.label}
+              onClick={() => setActive(stat.action)}
+              className={`relative text-left rounded-2xl p-5 border transition-all duration-200 hover:scale-[1.02] overflow-hidden ${stat.border} ${stat.bg}`}
+            >
+              {/* Top accent bar — same as role cards in Skill Gap */}
+              <div className={`absolute top-0 left-4 right-4 h-[2px] rounded-full bg-gradient-to-r ${stat.bar}`} />
+              <p className="text-[10px] text-white/35 uppercase tracking-widest mb-2">{stat.label}</p>
+              <p className={`text-3xl font-black ${stat.color}`}>
+                {stat.value}
+                <span className="text-base text-white/25">{stat.suffix}</span>
+              </p>
+              {/* Mini match bar */}
+              <div className="h-1 bg-white/8 rounded-full overflow-hidden mt-2 mb-1">
+                <div className={`h-full rounded-full bg-gradient-to-r ${stat.bar}`} style={{ width: "0%" }} />
+              </div>
+              <p className="text-xs text-white/25">{stat.sub}</p>
+            </button>
+          ))}
+        </div>
 
-      {/* ── Skills Progress + Recent Activity ── */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 z-10">
+        {/* ── Skills Progress + Recent Activity ── */}
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
 
-        {/* Skills Progress */}
-        <div className="rounded-2xl border border-white bg-black/10 p-5">
-          <p className="text-xs text-white/35 uppercase tracking-wider font-semibold mb-4">
-            Skill Proficiency
-          </p>
+          {/* Skills You Have — mirrors left panel of Skill Gap */}
+          <div className="rounded-2xl border border-white/8 bg-white/[0.02] p-5">
+            <div className="flex items-center gap-2 mb-5">
+              <div className="w-2 h-2 rounded-full bg-emerald-400" />
+              <p className="text-[11px] text-white/40 uppercase tracking-widest font-semibold">Skill Proficiency</p>
+            </div>
 
-          {skillScores.length > 0 ? (
-            <div className="space-y-3">
-              {skillScores.map((skill, i) => {
-                // har skill ka color alag
-                const colors = ["bg-blue-400", "bg-purple-400", "bg-green-400", "bg-orange-400", "bg-pink-400", "bg-cyan-400"];
-                return (
-                  <div key={i} className="flex items-center gap-3">
-                    <span className="text-xs text-white/50 w-24 truncate">{skill.name}</span>
-                    <div className="flex-1 h-1.5 bg-white/[0.06] rounded-full overflow-hidden">
-                      {/* score 0 abhi — baad mein dynamic hoga */}
+            {skillScores.length > 0 ? (
+              <div className="space-y-4">
+                {skillScores.map((skill, i) => (
+                  <div key={i}>
+                    <div className="flex justify-between mb-1.5">
+                      <span className="text-[12px] text-white/60 font-medium">{skill.name}</span>
+                      <span className="text-[11px] text-white/30">{skill.score}%</span>
+                    </div>
+                    <div className="h-1.5 bg-white/5 rounded-full overflow-hidden">
                       <div
-                        className={`h-full rounded-full ${colors[i % colors.length]} transition-all duration-700`}
+                        className={`h-full rounded-full bg-gradient-to-r ${skillBarColors[i % skillBarColors.length]} transition-all duration-700`}
                         style={{ width: `${skill.score}%` }}
                       />
                     </div>
-                    <span className="text-xs text-white/30 w-7 text-right">{skill.score}%</span>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p className="text-white/25 text-sm">No skills added yet</p>
+            )}
+
+            <p className="text-[10px] text-white/15 mt-5 pt-3 border-t border-white/5">
+              Scores update after Skill Gap Analysis
+            </p>
+          </div>
+
+          {/* Recent Activity — mirrors right panel */}
+          <div className="rounded-2xl border border-white/8 bg-white/[0.02] p-5">
+            <div className="flex items-center gap-2 mb-5">
+              <div className="w-2 h-2 rounded-full bg-violet-400" />
+              <p className="text-[11px] text-white/40 uppercase tracking-widest font-semibold">Recent Activity</p>
+            </div>
+            <div className="space-y-0">
+              {activities.map((act, i) => {
+                const dots = ["bg-sky-400","bg-violet-400","bg-emerald-400","bg-rose-400","bg-amber-400"];
+                return (
+                  <div key={i} className="flex items-center gap-3 py-2.5 border-b border-white/[0.04] last:border-0">
+                    <div className={`w-2 h-2 rounded-full flex-shrink-0 ${act.status === "done" ? dots[i % dots.length] : "bg-white/15"}`} />
+                    <div className="flex-1">
+                      <p className={`text-sm ${act.status === "done" ? "text-white/75" : "text-white/30"}`}>{act.title}</p>
+                      <p className="text-xs text-white/20">{act.time}</p>
+                    </div>
+                    <span className={`text-xs px-2 py-0.5 rounded-full font-medium border ${
+                      act.status === "done"
+                        ? "bg-emerald-500/15 text-emerald-400 border-emerald-500/20"
+                        : "bg-white/[0.05] text-white/25 border-white/8"
+                    }`}>
+                      {act.status === "done" ? "Done" : "Todo"}
+                    </span>
                   </div>
                 );
               })}
             </div>
-          ) : (
-            <p className="text-white/25 text-sm">No skills added yet</p>
-          )}
-
-          <p className="text-xs text-white/20 mt-4 pt-3 border-t border-white/[0.05]">
-            Scores update after Skill Gap Analysis
-          </p>
+          </div>
         </div>
 
-        {/* Recent Activity */}
-        <div className="rounded-2xl border border-white/[0.06] bg-white/[0.03] p-5">
-          <p className="text-xs text-white/35 uppercase tracking-wider font-semibold mb-4">
-            Recent Activity
-          </p>
-          <div className="space-y-0">
-            {activities.map((act, i) => (
-              <div key={i} className="flex items-center gap-3 py-2.5 border-b border-white/[0.04] last:border-0">
-                {/* dot — green if done, gray if pending */}
-                <div className={`w-2 h-2 rounded-full flex-shrink-0 ${act.status === "done" ? "bg-blue-400" : "bg-white/15"}`} />
-                <div className="flex-1">
-                  <p className={`text-sm ${act.status === "done" ? "text-white/75" : "text-white/30"}`}>
-                    {act.title}
-                  </p>
-                  <p className="text-xs text-white/20">{act.time}</p>
-                </div>
-                <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${
-                  act.status === "done"
-                    ? "bg-blue-500/15 text-blue-400"
-                    : "bg-white/[0.05] text-white/25"
-                }`}>
-                  {act.status === "done" ? "Done" : "Todo"}
-                </span>
+        {/* ── Resume ATS Box ── */}
+        <div className="relative rounded-2xl border border-sky-500/20 bg-sky-500/[0.03] p-5 overflow-hidden">
+          <div className="absolute top-0 left-4 right-4 h-[2px] rounded-full bg-gradient-to-r from-sky-400 to-violet-400" />
+          <div className="flex justify-between items-center mb-4">
+            <div>
+              <p className="text-[10px] text-white/35 uppercase tracking-widest font-semibold mb-1">
+                Resume ATS Analysis
+              </p>
+              <p className="text-sm text-white/30">
+                Upload your resume in{" "}
+                <button onClick={() => setActive("resume")} className="text-sky-400 underline underline-offset-2 hover:text-sky-300 transition-colors">
+                  Resume Analyzer
+                </button>{" "}
+                to get your ATS score
+              </p>
+            </div>
+            <div className="text-center px-6 py-4 rounded-xl border border-sky-500/20 bg-sky-500/10 flex-shrink-0">
+              <p className="text-3xl font-black text-sky-400">—</p>
+              <p className="text-xs text-white/25 mt-1">ATS Score</p>
+            </div>
+          </div>
+
+          {/* Breakdown mini cards — exact Skill Gap card style */}
+          <div className="grid grid-cols-4 gap-3">
+            {atsBreakdown.map((item) => (
+              <div key={item.label} className={`relative rounded-xl p-3 text-center border overflow-hidden ${item.border} ${item.bg}`}>
+                <div className={`absolute top-0 left-3 right-3 h-[2px] rounded-full bg-gradient-to-r ${item.bar}`} />
+                <p className={`text-base font-black ${item.color}`}>{item.value}</p>
+                <p className="text-xs text-white/25 mt-1">{item.label}</p>
               </div>
             ))}
           </div>
         </div>
+
+        {/* ── CTA — exact Skill Gap button ── */}
+        <button className="w-full py-3.5 rounded-xl font-semibold text-[13px] text-white bg-gradient-to-r from-violet-500 to-sky-500 hover:shadow-xl hover:shadow-violet-500/20 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-150 tracking-wide">
+          ✦ Start Full Career Analysis
+        </button>
+
       </div>
-
-      {/* ── Resume ATS Box ── */}
-      <div className="rounded-2xl border border-blue-500/20 bg-white/[0.02] p-5">
-        <div className="flex justify-between items-center mb-4">
-          <div>
-            <p className="text-xs text-white/35 uppercase tracking-wider font-semibold mb-1">
-              Resume ATS Analysis
-            </p>
-            <p className="text-sm text-white/30">
-              Upload your resume in{" "}
-              <button onClick={() => setActive("resume")} className="text-blue-400 underline underline-offset-2">
-                Resume Analyzer
-              </button>{" "}
-              to get your ATS score
-            </p>
-          </div>
-          {/* ATS Score ring */}
-          <div className="text-center px-6 py-4 bg-blue-500/[0.07] rounded-xl border border-blue-500/15 flex-shrink-0">
-            <p className="text-3xl font-bold text-blue-400">—</p>
-            <p className="text-xs text-white/25 mt-1">ATS Score</p>
-          </div>
-        </div>
-
-        {/* Breakdown mini cards */}
-        <div className="grid grid-cols-4 gap-3">
-          {atsBreakdown.map((item) => (
-            <div key={item.label} className="bg-white/[0.03] rounded-xl p-3 text-center border border-white/[0.04]">
-              <p className="text-base font-semibold text-white/30">{item.value}</p>
-              <p className="text-xs text-white/20 mt-1">{item.label}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-
     </div>
   );
 }
@@ -252,7 +293,7 @@ function Resume() {
         }}
       />
 
-      <div className="relative z-10 w-full max-w-lg">
+      <div className="relative z-10 w-full max-w-6xl">
 
         {/* ── Header ── */}
         <div className="mb-8">
@@ -1318,57 +1359,222 @@ function Learning() {
 
 
 
-
-function Mentor()     { 
-  return (
-  <div>
-    <h1 className="text-white text-2xl font-serif">🤖 AI Mentor Chat</h1>
-    <p className="text-gray-400 m-3 font-serif">Get personalized career guidance from your AI mentor</p>
-    <div className="w-full h-130 bg-blue-950 m-5 rounded-2xl pt-9 p-5 flex">
-      <img className="w-9 h-9" src="/globe.svg" alt="" /> <div className="w-8/10 h-40 font-serif text-sm bg-black text-white ml-3 p-5 rounded-2xl">Hello! I'm your AI Career Mentor. I'm here to help you with career guidance, interview preparation, skill development, and any career-related questions you might have.
-<br />
-<br />
-How can I assist you today? <p className="text-gray-400 text-xs mt-5">02:12 PM</p></div>
-<div className="mt-52 -ml-5 border-y border-gray-500 w-306  h-30 absolute p-4">Suggested questions:
-  <div className=" grid grid-cols-4 gap-5 mt-3">
-    <div className="border border-gray-500 rounded-full text-sm p-2 flex gap-2"> <img className="w-5 h-5" src="/hexa.svg" alt="" />How can I transition to a senior role?</div>
-    <div className="border border-gray-500 rounded-full text-sm p-2 flex gap-2"> <img className="w-5 h-5" src="/hexa.svg" alt="" />How can I transition to a senior role?</div>
-    <div className="border border-gray-500 rounded-full text-sm p-2 flex gap-2"> <img className="w-5 h-5" src="/hexa.svg" alt="" />How can I transition to a senior role?</div>
-    <div className="border border-gray-500 rounded-full text-sm p-2 flex gap-2"> <img className="w-5 h-5" src="/hexa.svg" alt="" />How can I transition to a senior role?</div>
-    </div>
-    </div>
-    <div className="absolute top-130 w-full flex">
-    <input className="w-[85%] h-12 border border-gray-500 p-3.5 rounded-2xl" type="text" placeholder="Ask your AI mentor anything..." />
-    <img className="w-5 h-5 rounded-2xl ml-4 bg-blue-400 p-6" src="/vercel.svg" alt="" />
-    </div>
-    <p className=" absolute top-143 ml-80 text-gray-500">AI responses are for guidance only. Always verify important career decisions.</p>
-    </div>
-    </div>
-    
-  )
-}
-function Settings()   { 
-  const [active, setActive] = useState("dashboard");
-
-const renderContent = () => {
-  switch (active) {
-    case "profile": return <Profile />;
-    case "notification": return <Notification />;
-    case "privacy": return <Privacy />;
-    case "appearance": return <Appearance />;
-    case "billing": return <Billing />;
-    default: return <Profile />;
-  }
-};
-
-const SET_ITEMS = [
-  { id: "profile", label: "Profile" },
-  { id: "notification", label: "Notification" },
-  { id: "privacy", label: "Privacy" },
-  { id: "appearance", label: "Appearance" },
-  { id: "billing", label: "Billing" },
+const SUGGESTED = [
+  "How can I transition to a senior role?",
+  "What skills should I learn next?",
+  "How do I negotiate my salary?",
+  "Prepare me for system design interview",
 ];
 
+function formatTime(date) {
+  return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+}
+
+function Mentor() {
+  const [messages, setMessages] = useState([
+    {
+      role: "assistant",
+      content: "Hello! I'm your AI Career Mentor. I'm here to help you with career guidance, interview preparation, skill development, and any career-related questions you might have.\n\nHow can I assist you today?",
+      time: formatTime(new Date()),
+    },
+  ]);
+  const [input, setInput] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [showSuggested, setShowSuggested] = useState(true);
+  const bottomRef = useRef();
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages, loading]);
+
+  const send = async (text) => {
+    const userText = text || input.trim();
+    if (!userText || loading) return;
+    setInput("");
+    setShowSuggested(false);
+
+    const userMsg = { role: "user", content: userText, time: formatTime(new Date()) };
+    const updated = [...messages, userMsg];
+    setMessages(updated);
+    setLoading(true);
+
+    try {
+      const apiMessages = updated.map((m) => ({ role: m.role, content: m.content }));
+      const res = await fetch("https://api.anthropic.com/v1/messages", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          model: "claude-sonnet-4-20250514",
+          max_tokens: 1000,
+          system: "You are an expert AI Career Mentor. Give concise, actionable, and encouraging career advice. Format responses clearly with short paragraphs. Never use excessive markdown — keep it conversational and warm.",
+          messages: apiMessages,
+        }),
+      });
+      const data = await res.json();
+      const reply = data.content?.[0]?.text || "Sorry, I couldn't get a response. Please try again.";
+      setMessages((prev) => [...prev, { role: "assistant", content: reply, time: formatTime(new Date()) }]);
+    } catch {
+      setMessages((prev) => [...prev, { role: "assistant", content: "Something went wrong. Please try again.", time: formatTime(new Date()) }]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-[#0d0f14] relative overflow-hidden px-4 py-16">
+
+      {/* Mood glows */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-rose-600 rounded-full opacity-20 blur-3xl pointer-events-none" />
+      <div className="absolute top-1/3 right-0 w-80 h-80 bg-sky-600 rounded-full opacity-20 blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-violet-700 rounded-full opacity-20 blur-3xl pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-emerald-600 rounded-full opacity-[0.18] blur-3xl pointer-events-none" />
+
+      {/* Dot grid */}
+      <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: "radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px)", backgroundSize: "28px 28px" }} />
+
+      <div className="relative z-10 w-full max-w-6xl mx-auto">
+
+        {/* Header */}
+        <div className="mb-6">
+          
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] tracking-widest uppercase text-white/30 font-medium mb-3">
+            ✦ AI Powered Mentorship
+          </div>
+          <h1 className="text-4xl font-black text-white tracking-tight">
+            🤖AI Mentor{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-emerald-400">
+              Chat
+            </span>
+          </h1>
+          <p className="text-white/30 mt-1 text-[13px] font-light">Get personalized career guidance from your AI mentor</p>
+        </div>
+
+        {/* Chat Container */}
+        <div className="w-full bg-[#0b0d12] border border-white/[0.08] rounded-2xl p-5 flex flex-col gap-4">
+
+          {/* Messages */}
+          <div className="flex flex-col gap-4 max-h-[420px] overflow-y-auto pr-1 scrollbar-thin">
+            {messages.map((msg, i) => (
+              <div key={i} className={`flex gap-3 items-start ${msg.role === "user" ? "flex-row-reverse" : ""}`}>
+
+                {/* Avatar */}
+                {msg.role === "assistant" ? (
+                  <div className="w-9 h-9 rounded-full flex items-center justify-center text-base shrink-0" style={{ background: "linear-gradient(135deg, #38bdf8, #a78bfa)" }}>
+                    🤖
+                  </div>
+                ) : (
+                  <div className="w-9 h-9 rounded-full flex items-center justify-center text-base shrink-0" style={{ background: "linear-gradient(135deg, #f43f5e, #fb923c)" }}>
+                    👤
+                  </div>
+                )}
+
+                {/* Bubble */}
+                <div className={`max-w-[75%] text-white text-sm p-4 leading-relaxed whitespace-pre-wrap
+                  ${msg.role === "assistant"
+                    ? "bg-white/5 border border-white/8 rounded-2xl rounded-tl-sm"
+                    : "rounded-2xl rounded-tr-sm border"
+                  }`}
+                  style={msg.role === "user" ? { background: "linear-gradient(135deg, rgba(244,63,94,0.15), rgba(56,189,248,0.10))", borderColor: "rgba(244,63,94,0.25)" } : {}}
+                >
+                  {msg.content}
+                  <p className="text-white/20 text-[10px] mt-2">{msg.time}</p>
+                </div>
+              </div>
+            ))}
+
+            {/* Loading dots */}
+            {loading && (
+              <div className="flex gap-3 items-start">
+                <div className="w-9 h-9 rounded-full flex items-center justify-center text-base shrink-0" style={{ background: "linear-gradient(135deg, #38bdf8, #a78bfa)" }}>🤖</div>
+                <div className="bg-white/5 border border-white/8 rounded-2xl rounded-tl-sm px-5 py-4 flex gap-1.5 items-center">
+                  {[0, 1, 2].map((d) => (
+                    <span key={d} className="w-1.5 h-1.5 rounded-full bg-white/30 animate-bounce" style={{ animationDelay: `${d * 0.15}s` }} />
+                  ))}
+                </div>
+              </div>
+            )}
+            <div ref={bottomRef} />
+          </div>
+
+          {/* Suggested Questions */}
+          {showSuggested && (
+            <div className="border-t border-b border-white/[0.08] py-4">
+              <p className="text-white/30 text-[10px] uppercase tracking-widest mb-3">Suggested questions</p>
+              <div className="grid grid-cols-2 gap-2">
+                {SUGGESTED.map((q, i) => {
+                  const colors = [
+                    "hover:border-rose-400/40 hover:bg-rose-400/5 hover:text-rose-300/70",
+                    "hover:border-sky-400/40 hover:bg-sky-400/5 hover:text-sky-300/70",
+                    "hover:border-violet-400/40 hover:bg-violet-400/5 hover:text-violet-300/70",
+                    "hover:border-emerald-400/40 hover:bg-emerald-400/5 hover:text-emerald-300/70",
+                  ];
+                  return (
+                    <div
+                      key={i}
+                      onClick={() => send(q)}
+                      className={`border border-white/10 bg-white/[0.03] ${colors[i]} rounded-full text-sm text-white/40 p-2 px-4 flex gap-2 cursor-pointer transition-all duration-200`}
+                    >
+                      <span className="opacity-60">✦</span> {q}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* Input */}
+          <div className="flex gap-3 items-center">
+            <input
+              className="flex-1 bg-white/5 border border-white/10 focus:border-sky-400/40 outline-none text-white text-sm placeholder-white/20 p-3.5 rounded-xl transition-all"
+              type="text"
+              placeholder="Ask your AI mentor anything..."
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && send()}
+              disabled={loading}
+            />
+            <button
+              onClick={() => send()}
+              disabled={loading || !input.trim()}
+              className="w-11 h-11 rounded-xl flex items-center justify-center text-white text-base hover:shadow-lg hover:shadow-sky-500/20 hover:-translate-y-0.5 transition-all disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:translate-y-0"
+              style={{ background: "linear-gradient(135deg, #f43f5e, #38bdf8, #a78bfa)" }}
+            >
+              ➤
+            </button>
+          </div>
+
+          {/* Feature chips */}
+          <div className="flex flex-wrap gap-2 justify-center pt-1">
+            {[
+              { label: "Career Growth", color: "border-rose-500/30 text-rose-400/60 bg-rose-500/5" },
+              { label: "Interview Prep", color: "border-sky-500/30 text-sky-400/60 bg-sky-500/5" },
+              { label: "Skill Building", color: "border-violet-500/30 text-violet-400/60 bg-violet-500/5" },
+              { label: "Salary Tips", color: "border-emerald-500/30 text-emerald-400/60 bg-emerald-500/5" },
+            ].map((c, i) => (
+              <span key={i} className={`text-[11px] px-3 py-1 rounded-full border font-light ${c.color}`}>{c.label}</span>
+            ))}
+          </div>
+
+          <p className="text-center text-white/15 text-[11px]">AI responses are for guidance only. Always verify important career decisions.</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+
+function Settings() {
+  const [active, setActive] = useState("profile");
+
+  const SET_ITEMS = [
+    { id: "profile", label: "Profile", icon: "👤" },
+    { id: "notification", label: "Notification", icon: "🔔" },
+    { id: "privacy", label: "Privacy", icon: "🔒" },
+    { id: "appearance", label: "Appearance", icon: "🎨" },
+    { id: "billing", label: "Billing", icon: "💳" },
+  ];
+
+  // ── ORIGINAL BACKEND CODE (untouched) ──
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState({
     fullName: "",
@@ -1378,18 +1584,17 @@ const SET_ITEMS = [
     bio: "",
   });
 
-  // 🔥 Fetch data from backend
   useEffect(() => {
     const fetchUser = async () => {
       try {
         const res = await axios.get("/api/users/me");
         setUser({
-  fullName: res.data.data.fullName || "",
-  email: res.data.data.email || "",
-  jobTitle: res.data.data.targetRole || "",
-  location: res.data.data.college || "",
-  bio: res.data.data.experience || "", 
-});
+          fullName: res.data.data.fullName || "",
+          email: res.data.data.email || "",
+          jobTitle: res.data.data.targetRole || "",
+          location: res.data.data.college || "",
+          bio: res.data.data.experience || "",
+        });
       } catch {
         router.push("/login");
       } finally {
@@ -1399,12 +1604,8 @@ const SET_ITEMS = [
     fetchUser();
   }, []);
 
-  // 🔥 Handle input change
-  const handleChange = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
-  };
+  const handleChange = (e) => setUser({ ...user, [e.target.name]: e.target.value });
 
-  // 🔥 Save updated data
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -1414,104 +1615,367 @@ const SET_ITEMS = [
       console.log("Error updating profile:", error);
     }
   };
+  // ── END ORIGINAL BACKEND CODE ──
 
-function Profile () {
-  return (
-    <div className="">
-      <h1 className="text-white">Profile Information</h1>
-      <p className="text-gray-400 text-sm mt-1">Update your personal details and public profile</p>
-      <div className="flex ">
-      <div className="w-21 h-21 bg-blue-600 rounded-full mt-10">{}</div>
-      <div className="text-white mt-13 ml-5">Change Avatar <p className="text-xs text-gray-400 mt-2 -ml-3">JPG, PNG or GIF. Max 2MB.</p></div>
-      </div>
-      <form onSubmit={handleSubmit} className=" text-white gap-4 w-full">
-      <div className="grid grid-cols-2 gap-5">
+  // ── Reusable input ──
+  const Field = ({ label, name, type = "text", placeholder }) => (
+    <div>
+      <label className="text-[10px] text-white/30 uppercase tracking-widest mb-1.5 block">{label}</label>
       <input
-        type="text"
-        name="fullName"
-        value={user.fullName}
-        onChange={handleChange}
-        placeholder="Full Name"
-        className="border p-2 "
+        type={type} name={name} value={user[name]} onChange={handleChange} placeholder={placeholder}
+        className="w-full bg-white/5 border border-white/10 focus:border-sky-400/40 outline-none text-white text-sm placeholder-white/20 p-3 rounded-xl transition-all"
       />
-
-      <input
-        type="email"
-        name="email"
-        value={user.email}
-        onChange={handleChange}
-        placeholder="Email"
-        className="border p-2"
-      />
-
-      <input
-        type="text"
-        name="jobTitle"
-        value={user.jobTitle}
-        onChange={handleChange}
-        placeholder="Job Title"
-        className="border p-2"
-      />
-
-      <input
-        type="text"
-        name="location"
-        value={user.location}
-        onChange={handleChange}
-        placeholder="Location"
-        className="border p-2"
-      />
-</div>
-<div className="flex flex-col">
-      <textarea
-        name="bio"
-        value={user.bio}
-        onChange={handleChange}
-        placeholder="Bio"
-        className="border p-2"
-      />
-
-      <button type="submit" className="bg-blue-500 text-white p-2">
-        Save Changes
-      </button>
-      </div>
-    </form>
     </div>
-  )
+  );
+
+  // ── Toggle row ──
+  const ToggleRow = ({ label, desc, defaultOn = false, accent = "sky" }) => {
+    const [on, setOn] = useState(defaultOn);
+    const gradients = {
+      sky:     "from-sky-500 to-violet-500",
+      rose:    "from-rose-500 to-pink-500",
+      emerald: "from-emerald-500 to-teal-500",
+      violet:  "from-violet-500 to-purple-500",
+    };
+    return (
+      <div className="flex items-center justify-between py-3.5 border-b border-white/5 last:border-0">
+        <div>
+          <p className="text-white text-sm font-medium">{label}</p>
+          <p className="text-white/30 text-xs mt-0.5">{desc}</p>
+        </div>
+        <button
+          onClick={() => setOn(!on)}
+          className={`w-11 h-6 rounded-full relative transition-all duration-300 ${on ? `bg-gradient-to-r ${gradients[accent]}` : "bg-white/10"}`}
+        >
+          <div className={`absolute top-1 w-4 h-4 rounded-full bg-white transition-all duration-300 ${on ? "left-6" : "left-1"}`} />
+        </button>
+      </div>
+    );
+  };
+
+  function Profile() {
+    return (
+      <div className="backdrop-blur-xs">
+        <h1 className="text-white font-semibold text-base font-serif">Profile Information</h1>
+        <p className="text-white/30 text-sm mt-1">Update your personal details and public profile</p>
+
+        <div className="flex items-center gap-4 mt-6 mb-6">
+          <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-2xl font-black text-white shrink-0"
+            style={{ background: "linear-gradient(135deg, #f43f5e, #38bdf8, #a78bfa)" }}>
+            {user.fullName?.[0] || "A"}
+          </div>
+          <div className="text-white text-sm font-medium">
+            Change Avatar
+            <p className="text-white/25 text-xs mt-1 font-normal">JPG, PNG or GIF. Max 2MB.</p>
+            <button className="mt-1.5 text-[11px] text-sky-400 border border-sky-400/30 px-3 py-1 rounded-lg hover:bg-sky-400/5 transition-all">Upload Photo</button>
+          </div>
+        </div>
+
+        <form onSubmit={handleSubmit} className="text-white w-full">
+          <div className="grid grid-cols-2 gap-4">
+            <Field label="Full Name" name="fullName" placeholder="Full Name" />
+            <Field label="Email" name="email" type="email" placeholder="Email" />
+            <Field label="Job Title" name="jobTitle" placeholder="Job Title" />
+            <Field label="Location" name="location" placeholder="Location" />
+          </div>
+          <div className="flex flex-col gap-3 mt-4">
+            <div>
+              <label className="text-[10px] text-white/30 uppercase tracking-widest mb-1.5 block">Bio</label>
+              <textarea name="bio" value={user.bio} onChange={handleChange} placeholder="Tell us about yourself..." rows={3}
+                className="w-full bg-white/5 border border-white/10 focus:border-rose-400/40 outline-none text-white text-sm placeholder-white/20 p-3 rounded-xl transition-all resize-none" />
+            </div>
+            <button type="submit"
+              className="w-fit px-6 py-2.5 rounded-xl text-sm font-semibold text-white hover:shadow-lg hover:shadow-rose-500/20 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-150"
+              style={{ background: "linear-gradient(to right, #f43f5e, #38bdf8, #a78bfa)" }}>
+              Save Changes
+            </button>
+          </div>
+        </form>
+      </div>
+    );
+  }
+
+  function Notification() {
+    return (
+      <div>
+        <h1 className="text-white font-semibold text-base font-serif">Notification Preferences</h1>
+        <p className="text-white/30 text-sm mt-1 mb-6">Choose what updates you want to receive</p>
+
+        <div className="mb-5">
+          <p className="text-[10px] text-white/25 uppercase tracking-widest mb-3">Email Alerts</p>
+          <div className="rounded-xl border border-sky-500/15 bg-sky-500/5 px-4">
+            <ToggleRow label="Weekly Progress Digest" desc="Summary of your learning and career progress" defaultOn={true} accent="sky" />
+            <ToggleRow label="Course Recommendations" desc="Personalized course suggestions" defaultOn={true} accent="sky" />
+            <ToggleRow label="Job Match Alerts" desc="When new roles match your profile" defaultOn={false} accent="sky" />
+            <ToggleRow label="Interview Reminders" desc="Reminders before scheduled mock interviews" defaultOn={true} accent="sky" />
+          </div>
+        </div>
+
+        <div>
+          <p className="text-[10px] text-white/25 uppercase tracking-widest mb-3">Push Notifications</p>
+          <div className="rounded-xl border border-violet-500/15 bg-violet-500/5 px-4">
+            <ToggleRow label="Mentor Reply" desc="When your AI mentor has a new response" defaultOn={true} accent="violet" />
+            <ToggleRow label="Streak Reminders" desc="Daily learning streak nudges" defaultOn={false} accent="violet" />
+            <ToggleRow label="Goal Deadlines" desc="Reminders when goals are approaching deadline" defaultOn={true} accent="violet" />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  function Privacy() {
+    return (
+      <div>
+        <h1 className="text-white font-semibold text-base font-serif">Privacy & Security</h1>
+        <p className="text-white/30 text-sm mt-1 mb-6">Control your data and account security</p>
+
+        <div className="mb-5">
+          <p className="text-[10px] text-white/25 uppercase tracking-widest mb-3">Visibility</p>
+          <div className="rounded-xl border border-emerald-500/15 bg-emerald-500/5 px-4">
+            <ToggleRow label="Public Profile" desc="Let others see your profile and achievements" defaultOn={true} accent="emerald" />
+            <ToggleRow label="Show Skill Scores" desc="Display your skill gap scores publicly" defaultOn={false} accent="emerald" />
+            <ToggleRow label="Activity Status" desc="Show when you were last active" defaultOn={true} accent="emerald" />
+          </div>
+        </div>
+
+        <div className="mb-5">
+          <p className="text-[10px] text-white/25 uppercase tracking-widest mb-3">Security</p>
+          <div className="rounded-xl border border-violet-500/15 bg-violet-500/5 px-4">
+            <ToggleRow label="Two-Factor Authentication" desc="Extra layer of security on login" defaultOn={false} accent="violet" />
+            <ToggleRow label="Login Alerts" desc="Email me when a new device logs in" defaultOn={true} accent="violet" />
+          </div>
+        </div>
+
+        <div className="rounded-xl border border-rose-500/20 bg-rose-500/5 p-4">
+          <p className="text-rose-400 text-sm font-semibold mb-1">Danger Zone</p>
+          <p className="text-white/30 text-xs mb-3">These actions are permanent and cannot be undone.</p>
+          <div className="flex gap-2">
+            <button className="text-[12px] px-4 py-2 rounded-lg border border-rose-500/30 text-rose-400 hover:bg-rose-500/10 transition-all">Delete Account</button>
+            <button className="text-[12px] px-4 py-2 rounded-lg border border-white/10 text-white/30 hover:bg-white/5 transition-all">Export Data</button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  function Appearance() {
+    const [theme, setTheme] = useState("dark");
+    const [accent, setAccent] = useState("sky");
+
+    const themes = [
+      { id: "dark", label: "Dark", bg: "bg-gray-950", preview: "🌑" },
+      { id: "light", label: "Light", bg: "bg-gray-100", preview: "☀️" },
+      { id: "midnight", label: "Midnight", bg: "bg-blue-950", preview: "🌌" },
+    ];
+
+    const accents = [
+      { id: "sky", cls: "bg-sky-500" },
+      { id: "violet", cls: "bg-violet-500" },
+      { id: "emerald", cls: "bg-emerald-500" },
+      { id: "rose", cls: "bg-rose-500" },
+      { id: "amber", cls: "bg-amber-500" },
+    ];
+
+    return (
+      <div>
+        <h1 className="text-white font-semibold text-base font-serif">Appearance</h1>
+        <p className="text-white/30 text-sm mt-1 mb-6">Customize your theme and display preferences</p>
+
+        <div className="mb-6">
+          <p className="text-[10px] text-white/25 uppercase tracking-widest mb-3">Theme</p>
+          <div className="grid grid-cols-3 gap-3">
+            {themes.map((t) => (
+              <button key={t.id} onClick={() => setTheme(t.id)}
+                className={`rounded-xl border p-4 text-center transition-all duration-150
+                  ${theme === t.id ? "border-emerald-400/40 bg-emerald-400/10 text-white" : "border-white/8 bg-white/[0.02] text-white/40 hover:border-white/15"}`}>
+                <span className="text-2xl block mb-2">{t.preview}</span>
+                <p className="text-sm font-medium">{t.label}</p>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="mb-6">
+          <p className="text-[10px] text-white/25 uppercase tracking-widest mb-3">Accent Color</p>
+          <div className="flex gap-3">
+            {accents.map((a) => (
+              <button key={a.id} onClick={() => setAccent(a.id)}
+                className={`w-8 h-8 rounded-full ${a.cls} transition-all duration-150 ${accent === a.id ? "ring-2 ring-white/40 ring-offset-2 ring-offset-[#0b0d12] scale-110" : "opacity-60 hover:opacity-90"}`} />
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <p className="text-[10px] text-white/25 uppercase tracking-widest mb-3">Display</p>
+          <div className="rounded-xl border border-emerald-500/15 bg-emerald-500/5 px-4">
+            <ToggleRow label="Compact Mode" desc="Reduce spacing for more content" defaultOn={false} accent="emerald" />
+            <ToggleRow label="Animations" desc="Enable UI transitions and effects" defaultOn={true} accent="emerald" />
+            <ToggleRow label="Show Progress Bars" desc="Display progress indicators everywhere" defaultOn={true} accent="emerald" />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  function Billing() {
+    const [plan] = useState("pro");
+
+    const plans = [
+      { id: "free",  label: "Free", price: "$0",  desc: "Basic access",  features: ["5 AI chats/month", "1 Resume scan", "Basic roadmap"] },
+      { id: "pro",   label: "Pro",  price: "$12", desc: "Most popular", features: ["Unlimited AI chats", "Resume analyzer", "Skill gap analysis", "Priority support"], highlight: true },
+      { id: "team",  label: "Team", price: "$29", desc: "For groups",   features: ["Everything in Pro", "5 team members", "Admin dashboard", "Custom roadmaps"] },
+    ];
+
+    return (
+      <div>
+        <h1 className="text-white font-semibold text-base font-serif">Billing & Plans</h1>
+        <p className="text-white/30 text-sm mt-1 mb-6">Manage your subscription and payment details</p>
+
+        {/* Current plan banner */}
+        <div className="rounded-xl border border-violet-400/20 bg-violet-400/5 p-4 flex items-center justify-between mb-6">
+          <div>
+            <p className="text-[10px] text-white/30 uppercase tracking-widest mb-1">Current Plan</p>
+            <p className="text-white font-bold text-base">Pro · $12/month</p>
+            <p className="text-white/30 text-xs mt-0.5">Renews on April 15, 2026</p>
+          </div>
+          <span className="text-[11px] px-3 py-1 rounded-full bg-violet-400/15 border border-violet-400/30 text-violet-400 font-semibold">Active</span>
+        </div>
+
+        {/* Plans */}
+        <div className="grid grid-cols-3 gap-3 mb-6">
+          {plans.map((p) => (
+            <div key={p.id}
+              className={`rounded-xl border p-4 transition-all duration-150 relative
+                ${plan === p.id ? "border-sky-400/40 bg-sky-400/5" : "border-white/8 bg-white/[0.02]"}`}>
+              {p.highlight && plan !== p.id && (
+                <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 text-[10px] px-2.5 py-0.5 rounded-full text-white font-semibold"
+                  style={{ background: "linear-gradient(to right, #f43f5e, #a78bfa)" }}>Popular</span>
+              )}
+              <p className="text-white font-bold text-sm">{p.label}</p>
+              <p className="text-white/30 text-xs mb-3">{p.desc}</p>
+              <p className="text-white text-xl font-black mb-3">{p.price}<span className="text-white/30 text-xs font-normal">/mo</span></p>
+              <ul className="space-y-1.5">
+                {p.features.map((f, i) => (
+                  <li key={i} className="text-white/40 text-[11px] flex gap-1.5 items-center">
+                    <span className="text-emerald-400 text-[10px]">✓</span>{f}
+                  </li>
+                ))}
+              </ul>
+              <button className={`w-full mt-4 py-2 rounded-lg text-[12px] font-semibold transition-all
+                ${plan === p.id
+                  ? "bg-sky-400/10 border border-sky-400/30 text-sky-400 cursor-default"
+                  : "bg-white/5 border border-white/10 text-white/50 hover:bg-white/10 hover:text-white"}`}>
+                {plan === p.id ? "Current Plan" : "Switch"}
+              </button>
+            </div>
+          ))}
+        </div>
+
+        {/* Payment method */}
+        <div>
+          <p className="text-[10px] text-white/25 uppercase tracking-widest mb-3">Payment Method</p>
+          <div className="rounded-xl border border-sky-500/15 bg-sky-500/5 p-4 flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-7 rounded-md flex items-center justify-center text-[10px] text-white font-bold"
+                style={{ background: "linear-gradient(to right, #2563eb, #38bdf8)" }}>VISA</div>
+              <div>
+                <p className="text-white text-sm font-medium">•••• •••• •••• 4242</p>
+                <p className="text-white/30 text-xs">Expires 08/27</p>
+              </div>
+            </div>
+            <button className="text-[11px] text-sky-400 border border-sky-400/30 px-3 py-1 rounded-lg hover:bg-sky-400/5 transition-all">Update</button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  const renderContent = () => {
+    switch (active) {
+      case "profile":      return <Profile />;
+      case "notification": return <Notification />;
+      case "privacy":      return <Privacy />;
+      case "appearance":   return <Appearance />;
+      case "billing":      return <Billing />;
+      default:             return <Profile />;
+    }
+  };
+
+  // ── Active tab color map ──
+  const activeColorMap = {
+    profile:      "from-rose-500/20 to-pink-500/20 border-rose-400/25 text-rose-300",
+    notification: "from-sky-500/20 to-cyan-500/20 border-sky-400/25 text-sky-300",
+    privacy:      "from-violet-500/20 to-purple-500/20 border-violet-400/25 text-violet-300",
+    appearance:   "from-emerald-500/20 to-teal-500/20 border-emerald-400/25 text-emerald-300",
+    billing:      "from-rose-500/20 to-orange-500/20 border-rose-400/25 text-rose-300",
+  };
+
+  return (
+    <div className="min-h-screen bg-[#0d0f14] relative overflow-hidden px-4 py-10">
+
+      {/* ── Mood glows ── */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-rose-600 rounded-full opacity-20 blur-3xl pointer-events-none" />
+      <div className="absolute top-1/3 right-0 w-80 h-80 bg-sky-600 rounded-full opacity-20 blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-violet-700 rounded-full opacity-20 blur-3xl pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-emerald-600 rounded-full opacity-[0.18] blur-3xl pointer-events-none" />
+
+      {/* ── Dot grid ── */}
+      <div className="absolute inset-0 pointer-events-none"
+        style={{ backgroundImage: "radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px)", backgroundSize: "28px 28px" }} />
+
+      <div className="relative z-10">
+
+        {/* ── Header ── */}
+        <div className="mb-1">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] tracking-widest uppercase text-white/30 font-medium mb-3">
+            ✦ Account Management
+          </div>
+          <h1 className="text-white text-2xl font-serif">
+            ⚙️ Settings{" "}
+            <span className="text-transparent bg-clip-text"
+              style={{ backgroundImage: "linear-gradient(to right, #f43f5e, #38bdf8, #a78bfa)" }}>
+              & Preferences
+            </span>
+          </h1>
+          <p className="text-white/30 mt-1 text-sm font-serif">Manage your account and preferences</p>
+        </div>
+
+        <div className="flex gap-4 mt-6">
+
+          {/* ── Sidebar ── */}
+          <div className="w-44 shrink-0">
+            <div className="rounded-2xl border border-white/[0.08] bg-white/[0.02] p-2 space-y-1">
+              {SET_ITEMS.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => setActive(item.id)}
+                  className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm transition-all duration-150 border
+                    ${active === item.id
+                      ? `bg-gradient-to-r ${activeColorMap[item.id]} font-semibold`
+                      : "text-white/40 hover:text-white/60 hover:bg-white/5 border-transparent"
+                    }`}
+                >
+                  <span>{item.icon}</span>
+                  {item.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* ── Content panel ── */}
+          <div className="flex-1 rounded-2xl border border-white/[0.08] bg-white/[0.02] p-6">
+            {/* Rainbow top bar */}
+            <div className="h-0.5 w-full rounded-full mb-6 opacity-50"
+              style={{ background: "linear-gradient(to right, #f43f5e, #38bdf8, #a78bfa, #34d399)" }} />
+            {renderContent()}
+          </div>
+
+        </div>
+      </div>
+    </div>
+  );
 }
 
-function Notification () {
-  return (
-    <div></div>
-  )
-}
-
-  return (
-    <div className="font-serif">
-  <h1 className="text-white text-2xl font-serif">⚙️ Settings</h1>
-  <p className="text-gray-400 m-2">Manage your account and preferences</p>
-  <div className="flex gap-10 mt-10">
-    <div className="w-1/4 h-160 bg-gray-800 rounded-2xl pt-8 p-2">
-    {SET_ITEMS.map((item) => (
-          <button
-            key={item.id}
-            onClick={() => setActive(item.id)}
-            className={`
-              block w-full text-left px-3 py-2.5 rounded-lg mb-1  text-sm transition-all
-              ${active === item.id
-                ? "bg-blue-500/90 text-white font-semibold"
-                : "text-white/50 hover:text-white hover:bg-white/10"
-              }
-            `}
-          >
-            {item.label}
-          </button>
-))}</div>
-    <div className="w-3/4 h-160 bg-gray-950 rounded-2xl p-7">{renderContent()}</div>
-  </div>
-  </div>
-  )
-}
 
 export default function App() {
   const [active, setActive] = useState("dashboard");
