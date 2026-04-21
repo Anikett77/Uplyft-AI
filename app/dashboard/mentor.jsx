@@ -45,18 +45,13 @@ export default function Mentor() {
 
     try {
       const apiMessages = updated.map((m) => ({ role: m.role, content: m.content }));
-      const res = await fetch("https://api.anthropic.com/v1/messages", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          model: "claude-sonnet-4-20250514",
-          max_tokens: 1000,
-          system: "You are an expert AI Career Mentor. Give concise, actionable, and encouraging career advice. Format responses clearly with short paragraphs. Never use excessive markdown — keep it conversational and warm.",
-          messages: apiMessages,
-        }),
-      });
+      const res = await fetch("/api/mentor", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ messages: apiMessages }),
+});
       const data = await res.json();
-      const reply = data.content?.[0]?.text || "Sorry, I couldn't get a response. Please try again.";
+      const reply = data.reply || "Sorry, I couldn't get a response. Please try again.";
       setMessages((prev) => [...prev, { role: "assistant", content: reply, time: formatTime(new Date()) }]);
     } catch {
       setMessages((prev) => [...prev, { role: "assistant", content: "Something went wrong. Please try again.", time: formatTime(new Date()) }]);
