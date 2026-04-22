@@ -32,7 +32,7 @@ export default function HeroSection() {
         <div className="absolute inset-0" style={{ background:"radial-gradient(ellipse 80% 60% at 50% 50%, transparent 30%, #060810 100%)" }} />
       </div>
 
-      {/* ── Floating stat cards ── */}
+      {/* ── Floating stat cards ──
       <FloatingCard className="top-[18%] left-[6%] hidden lg:block" style={{ animationDelay:"0s" }}>
         <div className="flex items-center gap-2.5">
           <div className="w-8 h-8 rounded-lg bg-emerald-500/20 flex items-center justify-center text-emerald-400 text-sm">✅</div>
@@ -71,7 +71,7 @@ export default function HeroSection() {
             <p className="text-amber-400 text-[11px]">72% complete</p>
           </div>
         </div>
-      </FloatingCard>
+      </FloatingCard> */}
 
       {/* ── Main content ── */}
       <div className="relative z-10 w-full max-w-5xl mx-auto px-6 text-center">
