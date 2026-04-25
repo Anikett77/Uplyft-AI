@@ -288,7 +288,7 @@ export default function SkillGap() {
         )}
 
         {/* CTA */}
-        <Link href="/resume" className="mt-5 w-full py-3.5 rounded-xl font-semibold text-[13px] text-white bg-gradient-to-r from-violet-500 to-sky-500 hover:shadow-xl hover:shadow-violet-500/20 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-150 tracking-wide flex items-center justify-center">
+        <Link href="" className="mt-5 w-full py-3.5 rounded-xl font-semibold text-[13px] text-white bg-gradient-to-r from-violet-500 to-sky-500 hover:shadow-xl hover:shadow-violet-500/20 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-150 tracking-wide flex items-center justify-center">
           ✦ View Full ATS Report
         </Link>
 

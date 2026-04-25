@@ -79,7 +79,7 @@ export default function Settings() {
       violet:  "from-violet-500 to-purple-500",
     };
     return (
-      <div className="flex items-center justify-between py-3.5 border-b border-white/5 last:border-0">
+      <div className="flex items-center justify-between py-3.5 border-b border-white/5 last:border-0" id="setting">
         <div>
           <p className="text-white text-sm font-medium">{label}</p>
           <p className="text-white/30 text-xs mt-0.5">{desc}</p>

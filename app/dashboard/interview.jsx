@@ -560,7 +560,7 @@ if (phase === "question") {
   return (
     <div className="min-h-screen flex justify-center relative overflow-hidden">
       <Orbs />
-      <div className="relative z-10 w-full m-10 border border-white/10 backdrop-blur-[1px] rounded-3xl p-10 shadow-2xl max-w-2xl self-start mt-16">
+      <div className="relative z-10 w-full m-10 border border-white/10 backdrop-blur-[1px] rounded-3xl p-10 shadow-2xl max-w-5xl self-start mt-16">
 
         <h1 className="text-4xl font-bold text-white leading-tight tracking-tight">
           Master Your{" "}
@@ -568,7 +568,7 @@ if (phase === "question") {
             Interview
           </span>
         </h1>
-        <p className="mt-3 text-sm text-white/35 font-light">
+        <p className="mt-3 text-sm text-white/70 font-light">
           Practice with our AI interviewer and get instant, detailed feedback on every answer.
         </p>
 
@@ -599,7 +599,7 @@ if (phase === "question") {
               <div className={`absolute top-3 right-3 w-4 h-4 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center text-black text-xs font-bold transition-all duration-200 ${selected === i ? "opacity-100 scale-100" : "opacity-0 scale-50"}`}>✓</div>
               <span className="text-xl mb-2 block">{t.icon}</span>
               <p className="text-sm font-semibold text-white mb-1">{t.name}</p>
-              <p className="text-xs text-white/30 font-light leading-snug">{t.desc}</p>
+              <p className="text-xs text-white/60 font-light leading-snug">{t.desc}</p>
             </button>
           ))}
         </div>
@@ -613,7 +613,7 @@ if (phase === "question") {
           ].map((s,i) => (
             <div key={i} className="rounded-xl bg-white/[0.025] border border-white/7 p-3 text-center">
               <p className="text-white font-semibold text-sm">{s.value}</p>
-              <p className="text-white/25 text-[10px] mt-0.5">{s.label}</p>
+              <p className="text-white/55 text-[10px] mt-0.5">{s.label}</p>
             </div>
           ))}
         </div>

@@ -111,7 +111,7 @@ export default function Dashboard() {
         {/* Stat cards */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {stats.map((s) => (
-            <button key={s.label} onClick={() => router.push(s.href)}
+            <button key={s.label}
               className={`relative text-left rounded-2xl p-5 border transition-all duration-200 hover:scale-[1.02] overflow-hidden ${s.border} ${s.bg}`}>
               <div className={`absolute top-0 left-4 right-4 h-[2px] rounded-full bg-gradient-to-r ${s.bar}`} />
               <p className="text-[10px] text-white/35 uppercase tracking-widest mb-2">{s.label}</p>
@@ -148,7 +148,7 @@ export default function Dashboard() {
             ) : (
               <div className="text-center py-6">
                 <p className="text-white/20 text-sm mb-3">No skills detected yet</p>
-                <button onClick={() => router.push("/resume")} className="text-[12px] px-4 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">Upload resume →</button>
+                <button className="text-[12px] px-4 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">Upload resume →</button>
               </div>
             )}
             <p className="text-[10px] text-white/15 mt-5 pt-3 border-t border-white/5">Scores inferred from ATS keyword analysis</p>
@@ -186,7 +186,7 @@ export default function Dashboard() {
             <div>
               <p className="text-[10px] text-white/35 uppercase tracking-widest font-semibold mb-1">Resume ATS Analysis</p>
               {!hasAts ? (
-                <p className="text-sm text-white/30">Upload your resume in <button onClick={() => router.push("/resume")} className="text-sky-400 underline underline-offset-2">Resume Analyzer</button> to get your ATS score</p>
+                <p className="text-sm text-white/30">Upload your resume in <button className="text-sky-400 underline underline-offset-2">Resume Analyzer</button> to get your ATS score</p>
               ) : (
                 <p className="text-sm text-white/50">{ats.overallSummary?.slice(0, 80)}…</p>
               )}
@@ -207,7 +207,7 @@ export default function Dashboard() {
           </div>
         </div>
 
-        <button onClick={() => router.push(hasResume ? "/skill-gap" : "/resume")}
+        <button
           className="w-full py-3.5 rounded-xl font-semibold text-[13px] text-white bg-gradient-to-r from-violet-500 to-sky-500 hover:shadow-xl hover:shadow-violet-500/20 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-150 tracking-wide">
           {hasResume ? "✦ View Full Career Analysis" : "✦ Start Full Career Analysis"}
         </button>

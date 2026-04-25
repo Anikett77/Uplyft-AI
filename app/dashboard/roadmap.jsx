@@ -247,7 +247,7 @@ export default function Roadmap() {
                   : `You're on track for ${targetRole}`}
               </p>
             </div>
-            <Link href="/skill-gap" className="shrink-0 px-5 py-2.5 rounded-xl text-sm font-semibold text-gray-900 bg-gradient-to-r from-orange-400 to-amber-400 hover:shadow-lg hover:shadow-amber-500/30 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-150">
+            <Link href="" className="shrink-0 px-5 py-2.5 rounded-xl text-sm font-semibold text-gray-900 bg-gradient-to-r from-orange-400 to-amber-400 hover:shadow-lg hover:shadow-amber-500/30 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-150">
               View Skill Gap →
             </Link>
           </div>
