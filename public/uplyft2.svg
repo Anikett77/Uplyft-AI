@@ -1,0 +1,104 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 232 232" width="232" height="232">
+	<defs>
+		<radialGradient id="g1" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(13000,0,0,13000,12956,13034)">
+			<stop offset="0" stop-color="#c77dff" stop-opacity=".35"/>
+			<stop offset="1" stop-color="#c77dff" stop-opacity="0"/>
+		</radialGradient>
+		<radialGradient id="g2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(11000,0,0,11000,11046,11054)">
+			<stop offset="0" stop-color="#4d96ff" stop-opacity=".25"/>
+			<stop offset="1" stop-color="#4d96ff" stop-opacity="0"/>
+		</radialGradient>
+		<linearGradient id="g3" x2="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(216,216,-216,216,8,6)">
+			<stop offset="0" stop-color="#ff6b6b"/>
+			<stop offset=".25" stop-color="#ffd93d"/>
+			<stop offset=".5" stop-color="#6bcb77"/>
+			<stop offset=".75" stop-color="#4d96ff"/>
+			<stop offset="1" stop-color="#ff6b6b"/>
+		</linearGradient>
+		<linearGradient id="g4" x2="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(200,200,-200,200,16,14)">
+			<stop offset="0" stop-color="#1a0533"/>
+			<stop offset="1" stop-color="#0a0a2e"/>
+		</linearGradient>
+		<clipPath clipPathUnits="userSpaceOnUse" id="cp1">
+			<path d="m52 14h128c19.88 0 36 16.12 36 36v128c0 19.88-16.12 36-36 36h-128c-19.88 0-36-16.12-36-36v-128c0-19.88 16.12-36 36-36z"/>
+		</clipPath>
+		<linearGradient id="g5" x2="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(104,144,-136.341,98.469,64,52)">
+			<stop offset="0" stop-color="#4d96ff"/>
+			<stop offset=".5" stop-color="#c77dff"/>
+			<stop offset="1" stop-color="#ff6b6b"/>
+		</linearGradient>
+		<linearGradient id="g6" x2="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(0,92,0,0,NaN,NaN)">
+			<stop offset="0" stop-color="#ffd93d"/>
+			<stop offset="1" stop-color="#ff6b6b"/>
+		</linearGradient>
+	</defs>
+	<style>
+		.s0 { fill: url(#g1) } 
+		.s1 { fill: url(#g2) } 
+		.s2 { opacity: .9;fill: none;stroke: url(#g3);stroke-width: 4 } 
+		.s3 { opacity: .08;fill: none;stroke: #ffffff } 
+		.s4 { fill: url(#g4) } 
+		.s5 { fill: #ffffff } 
+		.s6 { fill: none;stroke: url(#g5);stroke-linecap: round;stroke-linejoin: round;stroke-width: 18 } 
+		.s7 { fill: #000000;stroke: url(#g6);stroke-linecap: round;stroke-width: 10 } 
+		.s8 { fill: none;stroke: #ffd93d;stroke-linecap: round;stroke-linejoin: round;stroke-width: 10 } 
+		.s9 { opacity: .62;fill: #ff6b6b } 
+		.s10 { fill: #4d96ff } 
+		.s11 { opacity: .64;fill: #ffd93d } 
+		.s12 { opacity: .88;fill: #6bcb77 } 
+	</style>
+	<path fill-rule="evenodd" class="s0" d="m86 294c-71.89 0-130-58.11-130-130 0-71.89 58.11-130 130-130 71.89 0 130 58.11 130 130 0 71.89-58.11 130-130 130z"/>
+	<path fill-rule="evenodd" class="s1" d="m156 274c-60.83 0-110-49.17-110-110 0-60.83 49.17-110 110-110 60.83 0 110 49.17 110 110 0 60.83-49.17 110-110 110z"/>
+	<path fill-rule="evenodd" class="s2" d="m50 6h132c23.2 0 42 18.8 42 42v132c0 23.2-18.8 42-42 42h-132c-23.2 0-42-18.8-42-42v-132c0-23.2 18.8-42 42-42z"/>
+	<path fill-rule="evenodd" class="s3" d="m52 12h128c20.99 0 38 17.01 38 38v128c0 20.99-17.01 38-38 38h-128c-20.99 0-38-17.01-38-38v-128c0-20.99 17.01-38 38-38z"/>
+	<path fill-rule="evenodd" class="s4" d="m52 14h128c19.88 0 36 16.12 36 36v128c0 19.88-16.12 36-36 36h-128c-19.88 0-36-16.12-36-36v-128c0-19.88 16.12-36 36-36z"/>
+	<g id="Clip-Path" clip-path="url(#cp1)">
+		<g style="opacity: .07">
+			<path fill-rule="evenodd" class="s5" d="m46 46c-1.11 0-2-0.89-2-2 0-1.11 0.89-2 2-2 1.11 0 2 0.89 2 2 0 1.11-0.89 2-2 2z"/>
+			<path fill-rule="evenodd" class="s5" d="m76 46c-1.11 0-2-0.89-2-2 0-1.11 0.89-2 2-2 1.11 0 2 0.89 2 2 0 1.11-0.89 2-2 2z"/>
+			<path fill-rule="evenodd" class="s5" d="m106 46c-1.11 0-2-0.89-2-2 0-1.11 0.89-2 2-2 1.11 0 2 0.89 2 2 0 1.11-0.89 2-2 2z"/>
+			<path fill-rule="evenodd" class="s5" d="m136 46c-1.11 0-2-0.89-2-2 0-1.11 0.89-2 2-2 1.11 0 2 0.89 2 2 0 1.11-0.89 2-2 2z"/>
+			<path fill-rule="evenodd" class="s5" d="m166 46c-1.11 0-2-0.89-2-2 0-1.11 0.89-2 2-2 1.11 0 2 0.89 2 2 0 1.11-0.89 2-2 2z"/>
+			<path fill-rule="evenodd" class="s5" d="m196 46c-1.11 0-2-0.89-2-2 0-1.11 0.89-2 2-2 1.11 0 2 0.89 2 2 0 1.11-0.89 2-2 2z"/>
+			<path fill-rule="evenodd" class="s5" d="m46 76c-1.11 0-2-0.89-2-2 0-1.11 0.89-2 2-2 1.11 0 2 0.89 2 2 0 1.11-0.89 2-2 2z"/>
+			<path fill-rule="evenodd" class="s5" d="m76 76c-1.11 0-2-0.89-2-2 0-1.11 0.89-2 2-2 1.11 0 2 0.89 2 2 0 1.11-0.89 2-2 2z"/>
+			<path fill-rule="evenodd" class="s5" d="m106 76c-1.11 0-2-0.89-2-2 0-1.11 0.89-2 2-2 1.11 0 2 0.89 2 2 0 1.11-0.89 2-2 2z"/>
+			<path fill-rule="evenodd" class="s5" d="m136 76c-1.11 0-2-0.89-2-2 0-1.11 0.89-2 2-2 1.11 0 2 0.89 2 2 0 1.11-0.89 2-2 2z"/>
+			<path fill-rule="evenodd" class="s5" d="m166 76c-1.11 0-2-0.89-2-2 0-1.11 0.89-2 2-2 1.11 0 2 0.89 2 2 0 1.11-0.89 2-2 2z"/>
+			<path fill-rule="evenodd" class="s5" d="m196 76c-1.11 0-2-0.89-2-2 0-1.11 0.89-2 2-2 1.11 0 2 0.89 2 2 0 1.11-0.89 2-2 2z"/>
+			<path fill-rule="evenodd" class="s5" d="m46 106c-1.11 0-2-0.89-2-2 0-1.11 0.89-2 2-2 1.11 0 2 0.89 2 2 0 1.11-0.89 2-2 2z"/>
+			<path fill-rule="evenodd" class="s5" d="m76 106c-1.11 0-2-0.89-2-2 0-1.11 0.89-2 2-2 1.11 0 2 0.89 2 2 0 1.11-0.89 2-2 2z"/>
+			<path fill-rule="evenodd" class="s5" d="m106 106c-1.11 0-2-0.89-2-2 0-1.11 0.89-2 2-2 1.11 0 2 0.89 2 2 0 1.11-0.89 2-2 2z"/>
+			<path fill-rule="evenodd" class="s5" d="m136 106c-1.11 0-2-0.89-2-2 0-1.11 0.89-2 2-2 1.11 0 2 0.89 2 2 0 1.11-0.89 2-2 2z"/>
+			<path fill-rule="evenodd" class="s5" d="m166 106c-1.11 0-2-0.89-2-2 0-1.11 0.89-2 2-2 1.11 0 2 0.89 2 2 0 1.11-0.89 2-2 2z"/>
+			<path fill-rule="evenodd" class="s5" d="m196 106c-1.11 0-2-0.89-2-2 0-1.11 0.89-2 2-2 1.11 0 2 0.89 2 2 0 1.11-0.89 2-2 2z"/>
+			<path fill-rule="evenodd" class="s5" d="m46 136c-1.11 0-2-0.89-2-2 0-1.11 0.89-2 2-2 1.11 0 2 0.89 2 2 0 1.11-0.89 2-2 2z"/>
+			<path fill-rule="evenodd" class="s5" d="m76 136c-1.11 0-2-0.89-2-2 0-1.11 0.89-2 2-2 1.11 0 2 0.89 2 2 0 1.11-0.89 2-2 2z"/>
+			<path fill-rule="evenodd" class="s5" d="m106 136c-1.11 0-2-0.89-2-2 0-1.11 0.89-2 2-2 1.11 0 2 0.89 2 2 0 1.11-0.89 2-2 2z"/>
+			<path fill-rule="evenodd" class="s5" d="m136 136c-1.11 0-2-0.89-2-2 0-1.11 0.89-2 2-2 1.11 0 2 0.89 2 2 0 1.11-0.89 2-2 2z"/>
+			<path fill-rule="evenodd" class="s5" d="m166 136c-1.11 0-2-0.89-2-2 0-1.11 0.89-2 2-2 1.11 0 2 0.89 2 2 0 1.11-0.89 2-2 2z"/>
+			<path fill-rule="evenodd" class="s5" d="m196 136c-1.11 0-2-0.89-2-2 0-1.11 0.89-2 2-2 1.11 0 2 0.89 2 2 0 1.11-0.89 2-2 2z"/>
+			<path fill-rule="evenodd" class="s5" d="m46 166c-1.11 0-2-0.89-2-2 0-1.11 0.89-2 2-2 1.11 0 2 0.89 2 2 0 1.11-0.89 2-2 2z"/>
+			<path fill-rule="evenodd" class="s5" d="m76 166c-1.11 0-2-0.89-2-2 0-1.11 0.89-2 2-2 1.11 0 2 0.89 2 2 0 1.11-0.89 2-2 2z"/>
+			<path fill-rule="evenodd" class="s5" d="m106 166c-1.11 0-2-0.89-2-2 0-1.11 0.89-2 2-2 1.11 0 2 0.89 2 2 0 1.11-0.89 2-2 2z"/>
+			<path fill-rule="evenodd" class="s5" d="m136 166c-1.11 0-2-0.89-2-2 0-1.11 0.89-2 2-2 1.11 0 2 0.89 2 2 0 1.11-0.89 2-2 2z"/>
+			<path fill-rule="evenodd" class="s5" d="m166 166c-1.11 0-2-0.89-2-2 0-1.11 0.89-2 2-2 1.11 0 2 0.89 2 2 0 1.11-0.89 2-2 2z"/>
+			<path fill-rule="evenodd" class="s5" d="m196 166c-1.11 0-2-0.89-2-2 0-1.11 0.89-2 2-2 1.11 0 2 0.89 2 2 0 1.11-0.89 2-2 2z"/>
+			<path fill-rule="evenodd" class="s5" d="m46 196c-1.11 0-2-0.89-2-2 0-1.11 0.89-2 2-2 1.11 0 2 0.89 2 2 0 1.11-0.89 2-2 2z"/>
+			<path fill-rule="evenodd" class="s5" d="m76 196c-1.11 0-2-0.89-2-2 0-1.11 0.89-2 2-2 1.11 0 2 0.89 2 2 0 1.11-0.89 2-2 2z"/>
+			<path fill-rule="evenodd" class="s5" d="m106 196c-1.11 0-2-0.89-2-2 0-1.11 0.89-2 2-2 1.11 0 2 0.89 2 2 0 1.11-0.89 2-2 2z"/>
+			<path fill-rule="evenodd" class="s5" d="m136 196c-1.11 0-2-0.89-2-2 0-1.11 0.89-2 2-2 1.11 0 2 0.89 2 2 0 1.11-0.89 2-2 2z"/>
+			<path fill-rule="evenodd" class="s5" d="m166 196c-1.11 0-2-0.89-2-2 0-1.11 0.89-2 2-2 1.11 0 2 0.89 2 2 0 1.11-0.89 2-2 2z"/>
+			<path fill-rule="evenodd" class="s5" d="m196 196c-1.11 0-2-0.89-2-2 0-1.11 0.89-2 2-2 1.11 0 2 0.89 2 2 0 1.11-0.89 2-2 2z"/>
+		</g>
+	</g>
+	<g>
+		<path fill-rule="evenodd" class="s6" d="m64 52v100q0 44 52 44 52 0 52-44v-100"/>
+		<path fill-rule="evenodd" class="s7" d="m116 134v-78"/>
+		<path fill-rule="evenodd" class="s8" d="m100 76l16-24 16 24"/>
+	</g>
+	<path fill-rule="evenodd" class="s9" d="m8 118c-2.21 0-4-1.79-4-4 0-2.21 1.79-4 4-4 2.21 0 4 1.79 4 4 0 2.21-1.79 4-4 4z"/>
+	<path fill-rule="evenodd" class="s10" d="m224 118c-2.21 0-4-1.79-4-4 0-2.21 1.79-4 4-4 2.21 0 4 1.79 4 4 0 2.21-1.79 4-4 4z"/>
+	<path fill-rule="evenodd" class="s11" d="m116 10c-2.21 0-4-1.79-4-4 0-2.21 1.79-4 4-4 2.21 0 4 1.79 4 4 0 2.21-1.79 4-4 4z"/>
+	<path fill-rule="evenodd" class="s12" d="m116 226c-2.21 0-4-1.79-4-4 0-2.21 1.79-4 4-4 2.21 0 4 1.79 4 4 0 2.21-1.79 4-4 4z"/>
+</svg>

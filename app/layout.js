@@ -14,6 +14,9 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "Uplyft AI",
   description: "A Personalized Career Mentor",
+    icons: {
+    icon: "/uplyft2.svg",
+  },
 };
 
 export default function RootLayout({ children }) {

@@ -39,8 +39,8 @@ export default function Navbar() {
           {/* Logo */}
           <a href="#home" onClick={() => handleNav("#home")}
             className="flex items-center gap-2.5 group">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center text-sm shadow-lg shadow-blue-500/20 group-hover:shadow-blue-500/40 transition-shadow">
-              ✦
+            <div className="w-10 h-10">
+              <img className="w-15 h-15 object-cover object-centre" src="uplyft.svg" alt="" />
             </div>
             <span className="text-white font-semibold text-[15px] tracking-tight font-serif">
               Uplyft<span className="text-blue-400">AI</span>

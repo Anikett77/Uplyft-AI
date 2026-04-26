@@ -90,9 +90,9 @@ export default function Footer() {
           {/* Brand column */}
           <div className="lg:col-span-2">
             <a href="#home" className="inline-flex items-center gap-2.5 mb-4 group">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center text-sm shadow-md shadow-blue-500/20">
-                ✦
-              </div>
+              <div className="w-10 h-10">
+              <img className="w-15 h-15 object-cover object-centre" src="uplyft.svg" alt="" />
+            </div>
               <span className="text-white font-semibold text-base tracking-tight">
                 Uplyft<span className="text-blue-400">AI</span>
               </span>

@@ -111,9 +111,9 @@ useEffect(() => {
       {/* Logo */}
       <div className="mb-6 px-1">
         <div className="flex items-center gap-2.5">
-          <div className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 overflow-hidden border border-violet-500/30 bg-violet-500/10">
-            <img className="w-full h-full object-cover" src="/uplyft.svg" alt="Uplyft" />
-          </div>
+          <div className="w-10 h-10">
+              <img className="w-15 h-15 object-cover object-centre" src="uplyft.svg" alt="" />
+            </div>
           <div>
             <span className="text-white font-black text-base tracking-tight font-serif">Uplyft</span>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-sky-400 font-black text-base font-serif"> AI</span>

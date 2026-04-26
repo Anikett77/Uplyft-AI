@@ -48,7 +48,9 @@ export default function LoginPage() {
 
         {/* Brand */}
         <div className="flex items-center gap-2 mb-8">
-          <span className="w-2.5 h-2.5 rounded-full bg-blue-500 shadow-[0_0_8px_#3b82f6aa]" />
+          <div className="w-10 h-10">
+              <img className="w-15 h-15 object-cover object-centre" src="uplyft.svg" alt="" />
+            </div>
           <span className="text-sm font-semibold text-blue-200/80 tracking-wide">Uplyft</span>
         </div>
 
