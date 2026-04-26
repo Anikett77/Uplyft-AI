@@ -6,41 +6,64 @@ import bcryptjs from "bcryptjs";
 connect();
 
 export async function POST(request) {
-    try {
-        const reqBody = await request.json();
-        const { username, email, password } = reqBody;
+  try {
+    const reqBody = await request.json();
+    const { username, email, password } = reqBody;
 
-        const user = await User.findOne({ email });
+    console.log("Incoming:", reqBody); // 🔥 debug
 
-        if (user) {
-            return NextResponse.json({ error: "User already exists" }, { status: 400 });
-        }
-
-        const salt = await bcryptjs.genSalt(10);
-        const hashedPassword = await bcryptjs.hash(password, salt);
-
-        const newUser = new User({
-            username,
-            email,
-            password: hashedPassword,
-        });
-
-        const savedUser = await newUser.save();
-
-        return NextResponse.json({
-            message: "User created successfully",
-            success: true,
-            user: {
-                id: savedUser._id,
-                email: savedUser.email,
-                username: savedUser.username,
-            },
-        });
-
-    } catch (error) {
-        return NextResponse.json(
-            { error: error.message || "Something went wrong" },
-            { status: 500 }
-        );
+    // ✅ VALIDATION FIRST
+    if (!username || username.trim() === "") {
+      return NextResponse.json(
+        { error: "Username is required" },
+        { status: 400 }
+      );
     }
+
+    if (!email || !password) {
+      return NextResponse.json(
+        { error: "All fields are required" },
+        { status: 400 }
+      );
+    }
+
+    // ✅ check existing user
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return NextResponse.json(
+        { error: "User already exists" },
+        { status: 400 }
+      );
+    }
+
+    // ✅ hash password
+    const salt = await bcryptjs.genSalt(10);
+    const hashedPassword = await bcryptjs.hash(password, salt);
+
+    // ✅ create user
+    const newUser = new User({
+      username,
+      email,
+      password: hashedPassword,
+    });
+
+    const savedUser = await newUser.save();
+
+    return NextResponse.json({
+      message: "User created successfully",
+      success: true,
+      user: {
+        id: savedUser._id,
+        email: savedUser.email,
+        username: savedUser.username,
+      },
+    });
+
+  } catch (error) {
+    console.log("SIGNUP ERROR:", error); // 🔥 VERY IMPORTANT
+    return NextResponse.json(
+      { error: error.message || "Something went wrong" },
+      { status: 500 }
+    );
+  }
 }

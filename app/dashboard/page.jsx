@@ -185,10 +185,10 @@ if (loading) return (
     <UserContext.Provider value={user}>
     <div className="relative min-h-screen flex overflow-hidden bg-black">
 
-      {/* Spline background */}
+      {/* Spline background
       <div className="fixed inset-0 z-0 pointer-events-none translate-x-[8%]">
         <Spline scene="https://prod.spline.design/8d3KHxkReUNnmBVL/scene.splinecode" />
-      </div>
+      </div> */}
 
       {/* ── Mobile overlay ── */}
       {sidebarOpen && (
