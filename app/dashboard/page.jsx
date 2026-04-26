@@ -15,6 +15,7 @@ import Learning  from "@/app/dashboard/learning";
 import Mentor    from "@/app/dashboard/mentor";
 import Settings  from "@/app/dashboard/settings";
 import LogoutButton from "@/components/LogoutButton";
+import { UserContext } from "@/app/context/UserContext";
 
 const Spline = dynamic(() => import("@splinetool/react-spline"), { ssr: false });
 
@@ -35,21 +36,24 @@ export default function App() {
   // ── default is resume ──
   const [active,       setActive]      = useState("resume");
   const [sidebarOpen,  setSidebarOpen] = useState(false);
-  const [user,         setUser]        = useState(null);
+const [user,    setUser]    = useState(null);
+const [loading, setLoading] = useState(true); // ← add this line
   const [showNotif,    setShowNotif]   = useState(false);
   const [showProfile,  setShowProfile] = useState(false);
+  
 
   const router     = useRef(useRouter()).current;
   const notifRef   = useRef();
   const profileRef = useRef();
   const sidebarRef = useRef();
 
-  // Auth
-  useEffect(() => {
-    axios.get("/api/users/me")
-      .then(res => setUser(res.data.data))
-      .catch(() => router.push("/login"));
-  }, []);
+// REPLACE WITH:
+useEffect(() => {
+  axios.get("/api/users/me")
+    .then(res => setUser(res.data.data))
+    .catch(() => { window.location.href = "/login"; })
+    .finally(() => setLoading(false));
+}, []);
 
   // Close popouts on outside click
   useEffect(() => {
@@ -88,12 +92,12 @@ export default function App() {
     switch (active) {
       case "dashboard": return <Dashboard setActive={setActive} />;
       case "resume":    return <Resume />;
-      case "skillgap":  return <SkillGap />;
-      case "roadmap":   return <Roadmap />;
+      case "skillgap":  return <SkillGap setActive={setActive} />;
+      case "roadmap":   return <Roadmap setActive={setActive} />;
       case "interview": return <Interview />;
       case "jobs":      return <Jobs />;
       case "portfolio": return <Portfolio />;
-      case "learning":  return <Learning />;
+      case "learning":  return <Learning setActive={setActive} />;
       case "mentor":    return <Mentor />;
       case "settings":  return <Settings />;
       default:          return <Resume />;
@@ -169,7 +173,16 @@ export default function App() {
     </div>
   );
 
+if (loading) return (
+  <div className="min-h-screen bg-black flex items-center justify-center">
+    <div style={{ width:32, height:32, border:"2px solid rgba(255,255,255,0.1)", borderTop:"2px solid #a78bfa", borderRadius:"50%", animation:"spin 0.8s linear infinite" }} />
+    <style>{`@keyframes spin{to{transform:rotate(360deg)}}`}</style>
+  </div>
+);
+
+
   return (
+    <UserContext.Provider value={user}>
     <div className="relative min-h-screen flex overflow-hidden bg-black">
 
       {/* Spline background */}
@@ -342,5 +355,6 @@ export default function App() {
         </div>
       </main>
     </div>
+    </UserContext.Provider>
   );
 }

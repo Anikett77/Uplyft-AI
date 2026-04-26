@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useResumeState } from "@/hooks/useResumeState";
 import { useLearningState } from "@/hooks/useLearningState";
 
-export default function Dashboard() {
+export default function Dashboard({ setActive }) {
   const router = useRouter();
   const { parsed, ats, step, hydrated: resumeHydrated } = useResumeState();
   const { courses, tasks, streak, hoursLearned, hydrated: learningHydrated } = useLearningState();
@@ -148,7 +148,7 @@ export default function Dashboard() {
             ) : (
               <div className="text-center py-6">
                 <p className="text-white/20 text-sm mb-3">No skills detected yet</p>
-                <button className="text-[12px] px-4 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">Upload resume →</button>
+                <button className="text-[12px] px-4 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400" onClick={() => setActive("resume")}>Upload resume →</button>
               </div>
             )}
             <p className="text-[10px] text-white/15 mt-5 pt-3 border-t border-white/5">Scores inferred from ATS keyword analysis</p>
@@ -186,7 +186,7 @@ export default function Dashboard() {
             <div>
               <p className="text-[10px] text-white/35 uppercase tracking-widest font-semibold mb-1">Resume ATS Analysis</p>
               {!hasAts ? (
-                <p className="text-sm text-white/30">Upload your resume in <button className="text-sky-400 underline underline-offset-2">Resume Analyzer</button> to get your ATS score</p>
+                <p className="text-sm text-white/30">Upload your resume in <button className="text-sky-400 underline underline-offset-2" onClick={() => setActive("resume")}>Resume Analyzer</button> to get your ATS score</p>
               ) : (
                 <p className="text-sm text-white/50">{ats.overallSummary?.slice(0, 80)}…</p>
               )}

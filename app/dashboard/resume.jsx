@@ -143,7 +143,7 @@ export default function Resume() {
       <div style={{ minHeight:"100vh", background:"#0d0f14", display:"flex", alignItems:"center",
         justifyContent:"center", padding:"4rem 1rem", position:"relative", overflow:"hidden" }}>
         <Blobs />
-        <div style={{ position:"relative", zIndex:10, width:"100%", maxWidth:560 }}>
+        <div style={{ position:"relative", zIndex:10, width:"100%", maxWidth:960 }}>
           <div style={{ marginBottom:"1.75rem" }}>
             <span style={{ display:"inline-flex", alignItems:"center", padding:"3px 12px", borderRadius:20,
               background:"rgba(255,255,255,0.05)", border:"1px solid rgba(255,255,255,0.09)",

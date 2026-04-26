@@ -112,7 +112,7 @@ function AddCourseModal({ onAdd, onClose }) {
 }
 
 // ── Main ──────────────────────────────────────────────────────────────────
-export default function Learning() {
+export default function Learning({setActive}) {
   const { parsed, ats, step } = useResumeState();
   const {
     courses, tasks, streak, hoursLearned, planGenerated, hydrated,
@@ -185,7 +185,7 @@ export default function Learning() {
 
           {/* Resume link if not parsed */}
           {!hasResume && (
-            <a href="/resume" className="text-[11px] px-4 py-2 rounded-lg bg-violet-500/10 border border-violet-500/20 text-violet-400 hover:bg-violet-500/15 transition-colors">
+            <a onClick={()=> setActive("resume")} className="text-[11px] px-4 py-2 rounded-lg bg-violet-500/10 border border-violet-500/20 text-violet-400 hover:bg-violet-500/15 transition-colors">
               Upload resume for personalised plan →
             </a>
           )}
@@ -399,7 +399,7 @@ export default function Learning() {
             ✅ Learning plan loaded from your resume · {activeCourses.length} courses suggested
           </div>
         ) : (
-          <a href="/resume"
+          <a onClick={()=> setActive("resume")}
             className="block w-full py-3.5 rounded-xl font-semibold text-[13px] text-white text-center bg-gradient-to-r from-violet-500 to-emerald-500 hover:shadow-xl hover:shadow-violet-500/20 hover:-translate-y-0.5 transition-all">
             ✦ Upload Resume to Generate Plan
           </a>

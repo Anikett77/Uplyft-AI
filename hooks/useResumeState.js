@@ -1,45 +1,44 @@
 "use client";
 import { useState, useEffect } from "react";
+import { useUser } from "@/app/context/UserContext"; // ← add this import
 
-const STORAGE_KEY = "resume_state";
+// ← REMOVE this line:
+// const STORAGE_KEY = "resume_state";
 
 const defaultState = {
-  step: "upload",   // upload | parsed | results
+  step: "upload",
   parsed: null,
   ats: null,
   fileName: null,
 };
 
 export function useResumeState() {
+  const user = useUser();                                              // ← add
+  const KEY  = user?._id ? `resume_state_${user._id}` : null;        // ← add
+
   const [state, setStateRaw] = useState(defaultState);
   const [hydrated, setHydrated] = useState(false);
 
-  // ── Load from localStorage on mount ──
   useEffect(() => {
+    if (!KEY) { setHydrated(true); return; }                         // ← add guard
     try {
-      const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored) {
-        const parsed = JSON.parse(stored);
-        setStateRaw(parsed);
-      }
+      const stored = localStorage.getItem(KEY);                      // ← KEY not STORAGE_KEY
+      if (stored) setStateRaw(JSON.parse(stored));
     } catch {}
     setHydrated(true);
-  }, []);
+  }, [KEY]);                                                          // ← KEY in deps
 
-  // ── Persist every change ──
   const setState = (updater) => {
+    if (!KEY) return;                                                 // ← add guard
     setStateRaw((prev) => {
       const next = typeof updater === "function" ? updater(prev) : { ...prev, ...updater };
-      try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
-      } catch {}
+      try { localStorage.setItem(KEY, JSON.stringify(next)); } catch {}
       return next;
     });
   };
 
-  // ── Clear on logout — call this from your logout handler ──
   const clearResumeState = () => {
-    localStorage.removeItem(STORAGE_KEY);
+    if (KEY) localStorage.removeItem(KEY);                           // ← KEY not STORAGE_KEY
     setStateRaw(defaultState);
   };
 

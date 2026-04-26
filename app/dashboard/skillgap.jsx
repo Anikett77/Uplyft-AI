@@ -31,7 +31,7 @@ const Blobs = () => (
 );
 
 // ── No resume state — prompt user to upload ──────────────────────────────
-function EmptyState() {
+function EmptyState({ setActive }) {
   return (
     <div className="min-h-screen bg-[#0b0d12] relative overflow-hidden flex items-center justify-center px-4">
       <Blobs />
@@ -41,16 +41,16 @@ function EmptyState() {
         <p className="text-white/30 text-sm mb-6 leading-relaxed">
           Upload and analyse your resume first to see your real skill gap data here.
         </p>
-        <Link href="/resume" className="inline-block px-6 py-3 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-violet-500 to-sky-500">
+        <button onClick={() => setActive("resume")} className="inline-block px-6 py-3 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-violet-500 to-sky-500">
           Go to Resume Analyzer →
-        </Link>
+        </button>
       </div>
     </div>
   );
 }
 
 // ── Main ──────────────────────────────────────────────────────────────────
-export default function SkillGap() {
+export default function SkillGap({ setActive }) {
   const { step, parsed, ats, hydrated } = useResumeState();
   const [selected, setSelected] = useState(0);
 
@@ -65,7 +65,7 @@ export default function SkillGap() {
   }
 
   // No data yet
-  if (step === "upload" || !parsed || !ats) return <EmptyState />;
+  if (step === "upload" || !parsed || !ats) return <EmptyState setActive={setActive} />;
 
   // ── Build role cards from ATS roleMatch + inferred alternates ────────────
   // Primary role comes from ATS analysis

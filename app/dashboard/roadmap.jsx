@@ -79,7 +79,7 @@ function buildRoadmap(parsed, ats) {
 }
 
 // ── Empty state ────────────────────────────────────────────────────────────
-function EmptyState() {
+function EmptyState({setActive}) {
   return (
     <div className="min-h-screen bg-gray-950 relative overflow-hidden flex items-center justify-center px-4">
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-rose-600 rounded-full opacity-20 blur-3xl pointer-events-none" />
@@ -90,16 +90,16 @@ function EmptyState() {
         <p className="text-white/30 text-sm mb-6 leading-relaxed">
           Analyse your resume first so we can build a personalised career roadmap based on your real skill gaps.
         </p>
-        <Link href="/resume" className="inline-block px-6 py-3 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-rose-500 to-violet-500">
+        <button onClick={() => setActive("resume")} className="inline-block px-6 py-3 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-rose-500 to-violet-500">
           Go to Resume Analyzer →
-        </Link>
+        </button>
       </div>
     </div>
   );
 }
 
 // ── Main ──────────────────────────────────────────────────────────────────
-export default function Roadmap() {
+export default function Roadmap({setActive}) {
   const { step, parsed, ats, hydrated } = useResumeState();
   const [hovered, setHovered] = useState(null);
 
@@ -112,7 +112,7 @@ export default function Roadmap() {
     );
   }
 
-  if (step === "upload" || !parsed || !ats) return <EmptyState />;
+  if (step === "upload" || !parsed || !ats) return <EmptyState setActive={setActive} />;
 
   const { phases, progressPct, targetRole, nextPhase } = buildRoadmap(parsed, ats);
   const activePhase = phases.find(p => p.statusKey === "active");
@@ -132,9 +132,9 @@ export default function Roadmap() {
         {/* Header */}
         <div className="mb-14 text-center">
           <div className="flex items-center justify-end mb-4">
-            <Link href="/resume" className="text-[11px] px-4 py-2 rounded-lg bg-white/5 border border-white/9 text-white/30 hover:text-white/60 transition-colors">
+            <button onClick={() => setActive("resume")} className="text-[11px] px-4 py-2 rounded-lg bg-white/5 border border-white/9 text-white/30 hover:text-white/60 transition-colors">
               ↩ Resume Report
-            </Link>
+            </button>
           </div>
 
           <h1 className="text-5xl font-black text-white tracking-tight leading-tight">
