@@ -10,8 +10,6 @@ export async function POST(request) {
         const reqBody = await request.json();
         const { username, email, password } = reqBody;
 
-        console.log(reqBody);
-
         const user = await User.findOne({ email });
 
         if (user) {
@@ -28,7 +26,6 @@ export async function POST(request) {
         });
 
         const savedUser = await newUser.save();
-        console.log("User saved:", savedUser);
 
         return NextResponse.json({
             message: "User created successfully",

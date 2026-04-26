@@ -30,7 +30,6 @@ export async function middleware(request) {
       const profileCompleted = data?.data?.profileCompleted;
       const userId = data?.data?._id;
 
-      console.log("profileCompleted:", profileCompleted);
 
       // ✅ if profile NOT completed → stay on /profile
       if (!profileCompleted) {
