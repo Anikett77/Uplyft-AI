@@ -107,7 +107,7 @@ export default function Works() {
     <div id="works">
 
       {/* ── How it works ── */}
-      <section className="relative py-24 px-4 overflow-hidden">
+      <section className="relative py-24 px-4 overflow-hidden bg-black">
         <div className="absolute top-0 right-1/4 w-[400px] h-[300px] rounded-full bg-blue-700 opacity-[0.06] blur-3xl pointer-events-none" />
 
         <div className="max-w-6xl mx-auto">
@@ -148,7 +148,7 @@ export default function Works() {
       </section>
 
       {/* ── Platform preview + feature list ── */}
-      <section className="py-16 px-4">
+      <section className="py-16 px-4 bg-black">
         <div className="max-w-6xl mx-auto grid grid-cols-1 gap-12 lg:grid-cols-2 items-center">
           <div>
             <span className="inline-flex items-center px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-[11px] tracking-widest uppercase text-blue-400 font-medium mb-4">
@@ -190,7 +190,7 @@ export default function Works() {
       </section>
 
       {/* ── Stats ── */}
-      <section className="py-14 px-4">
+      {/* <section className="py-14 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="rounded-3xl border border-white/8 bg-gradient-to-br from-gray-900/80 via-gray-900/40 to-gray-900/80 p-8 sm:p-12">
             <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 text-white">
@@ -206,7 +206,7 @@ export default function Works() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 }

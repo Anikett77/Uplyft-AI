@@ -128,9 +128,13 @@ export default function ProfileForm() {
     <main className="relative min-h-screen w-full overflow-hidden bg-background">
 
       {/* ── Spline 3D Background ── */}
-      <div className="fixed inset-0 z-0 pointer-events-none">
+      {/* <div className="fixed inset-0 z-0 pointer-events-none">
         <Spline scene="https://prod.spline.design/KsAYMi9P1EDwvOyz/scene.splinecode" />
-      </div>
+      </div> */}
+                    <div className="absolute -top-32 -right-24 w-[400px] h-[400px] rounded-full bg-violet-700 opacity-[0.30] blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 -left-24 w-[350px] h-[350px] rounded-full bg-sky-700 opacity-[0.40] blur-3xl pointer-events-none" />
+      <div className="absolute top-1/2 right-1/4 w-[250px] h-[250px] rounded-full bg-emerald-700 opacity-[0.67] blur-3xl pointer-events-none" />
+      <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage:"radial-gradient(rgba(255,255,255,0.035) 1px,transparent 1px)", backgroundSize:"28px 28px" }} />
 
       {/* ── Page Content ── */}
       <div className="relative z-10 min-h-screen flex flex-col items-center py-12 px-4">

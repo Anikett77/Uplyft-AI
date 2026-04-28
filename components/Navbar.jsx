@@ -34,7 +34,7 @@ export default function Navbar() {
           ? "bg-[#060810]/80 backdrop-blur-xl border-b border-white/[0.06] shadow-xl shadow-black/20"
           : "bg-transparent"
       }`}>
-        <div className="max-w-6xl mx-auto px-5 py-4 flex items-center justify-between">
+        <div className="max-w-6xl mx-auto px-5 py-4 flex items-center justify-between bg-black">
 
           {/* Logo */}
           <a href="#home" onClick={() => handleNav("#home")}
@@ -120,7 +120,7 @@ export default function Navbar() {
       </nav>
 
       {/* Spacer so content doesn't sit behind fixed nav */}
-      <div className="h-[64px]" />
+      <div className="h-[64px] bg-black" />
     </>
   );
 }

@@ -109,7 +109,7 @@ const FEATURES = [
 
 export default function Features() {
   return (
-    <div id="features" className="relative py-24 px-4 overflow-hidden">
+    <div id="features" className="relative py-24 px-4 overflow-hidden bg-black">
       {/* Background */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] rounded-full bg-blue-700 opacity-[0.06] blur-3xl pointer-events-none" />
 

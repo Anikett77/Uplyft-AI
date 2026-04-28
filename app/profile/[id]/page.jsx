@@ -37,12 +37,16 @@ export default function UserProfilePage() {
   if (!user) return null;
 
   return (
-    <div className="relative min-h-screen px-4 py-10">
+    <div className="relative min-h-screen px-4 py-10 bg-black text-white">
   
   {/* Spline Background */}
-  <div className="fixed inset-0 z-0 ">
+  {/* <div className="fixed inset-0 z-0 ">
     <Spline scene="https://prod.spline.design/KsAYMi9P1EDwvOyz/scene.splinecode" />
-  </div>
+  </div> */}
+              <div className="absolute -top-32 -right-24 w-[400px] h-[400px] rounded-full bg-violet-700 opacity-[0.30] blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 -left-24 w-[350px] h-[350px] rounded-full bg-sky-700 opacity-[0.40] blur-3xl pointer-events-none" />
+      <div className="absolute top-1/2 right-1/4 w-[250px] h-[250px] rounded-full bg-emerald-700 opacity-[0.67] blur-3xl pointer-events-none" />
+      <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage:"radial-gradient(rgba(255,255,255,0.035) 1px,transparent 1px)", backgroundSize:"28px 28px" }} />
 
   {/* Content — z-10 se upar rahega */}
   <div className="relative z-10 max-w-4xl mx-auto space-y-6">
@@ -62,8 +66,8 @@ export default function UserProfilePage() {
     </div>
 
     {/* Personal Info */}
-    <div className="rounded-2xl border border-gray-200 bg-transparent p-6 space-y-4 shadow-sm">
-      <h2 className="text-lg font-semibold text-foreground border-b border-gray-100 pb-2">
+    <div className="rounded-2xl bg-blue-950/50 p-6 space-y-4 shadow-sm">
+      <h2 className="text-lg font-semibold text-foreground border-b border-gray-500 pb-2">
         Personal Information
       </h2>
       <div className="grid grid-cols-2 gap-4">
@@ -77,8 +81,8 @@ export default function UserProfilePage() {
     </div>
 
     {/* Career Info */}
-    <div className="rounded-2xl border border-gray-200 bg-transparent p-6 space-y-4 shadow-sm">
-      <h2 className="text-lg font-semibold text-foreground border-b border-gray-100 pb-2">
+    <div className="rounded-2xl bg-blue-950/50 p-6 space-y-4 shadow-sm">
+      <h2 className="text-lg font-semibold text-foreground border-b border-gray-500 pb-2">
         Career Information
       </h2>
       <div className="grid grid-cols-2 gap-4">
@@ -88,8 +92,8 @@ export default function UserProfilePage() {
     </div>
 
     {/* Skills */}
-    <div className="rounded-2xl border border-gray-200 bg-transparent p-6 space-y-3 shadow-sm">
-      <h2 className="text-lg font-semibold text-foreground border-b border-gray-100 pb-2">
+    <div className="rounded-2xl bg-blue-950/50 p-6 space-y-3 shadow-sm">
+      <h2 className="text-lg font-semibold text-foreground border-b border-gray-500 pb-2">
         Skills
       </h2>
       <div className="flex flex-wrap gap-2">
@@ -105,8 +109,8 @@ export default function UserProfilePage() {
     </div>
 
     {/* Interests */}
-    <div className="rounded-2xl border border-gray-200 bg-transparent p-6 space-y-3 shadow-sm">
-      <h2 className="text-lg font-semibold text-foreground border-b border-gray-100 pb-2">
+    <div className="rounded-2xl bg-blue-950/50 p-6 space-y-3 shadow-sm">
+      <h2 className="text-lg font-semibold text-foreground border-b border-gray-500 pb-2">
         Interests
       </h2>
       <div className="flex flex-wrap gap-2">

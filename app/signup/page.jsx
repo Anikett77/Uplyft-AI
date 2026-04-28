@@ -35,9 +35,13 @@ export default function SignupPage() {
     <div className="relative w-full min-h-screen bg-[#060d1a] flex items-center justify-end overflow-hidden">
 
       {/* Spline 3D background */}
-      <div className="absolute inset-0 w-full h-full">
+      {/* <div className="absolute inset-0 w-full h-full">
         <Spline scene="https://prod.spline.design/tM5aVTqwc4uR8a2Q/scene.splinecode" />
-      </div>
+      </div> */}
+            <div className="absolute -top-32 -right-24 w-[400px] h-[400px] rounded-full bg-violet-700 opacity-[0.30] blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 -left-24 w-[350px] h-[350px] rounded-full bg-sky-700 opacity-[0.40] blur-3xl pointer-events-none" />
+      <div className="absolute top-1/2 right-1/4 w-[250px] h-[250px] rounded-full bg-emerald-700 opacity-[0.67] blur-3xl pointer-events-none" />
+      <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage:"radial-gradient(rgba(255,255,255,0.035) 1px,transparent 1px)", backgroundSize:"28px 28px" }} />
 
       {/* Right-side fade */}
       <div className="absolute inset-0 bg-gradient-to-r from-[#04091480] via-[#04091450] to-transparent pointer-events-none z-[1]" />

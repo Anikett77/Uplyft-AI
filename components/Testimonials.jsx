@@ -53,7 +53,7 @@ const TESTIMONIALS = [
 
 export default function Testimonials() {
   return (
-    <section id="testimonial" className="relative py-24 px-4 overflow-hidden font-serif">
+    <section id="testimonial" className="relative py-24 px-4 overflow-hidden font-serif bg-black">
       <div className="absolute top-0 left-1/4 w-[400px] h-[300px] rounded-full bg-violet-700 opacity-[0.06] blur-3xl pointer-events-none" />
 
       <div className="max-w-6xl mx-auto">
