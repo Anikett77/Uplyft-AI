@@ -204,7 +204,12 @@ Every feature reads from the same parsed resume — upload once, everything pers
 
 > Dashboard · Resume Analyzer · ATS Report · Mock Interview · Career Roadmap
 
-*(Add your screenshots here)*
+<img src="./public//Screenshot 2026-04-26 085446.png">
+<img src="./public//Screenshot 2026-04-26 091034.png">
+<img src="./public//Screenshot 2026-04-26 091115.png">
+<img src="./public//Screenshot 2026-04-26 091129.png">
+<img src="./public//Screenshot 2026-04-26 091205.png">
+<img src="./public//Screenshot 2026-04-26 091221.png">
 
 ---
 
