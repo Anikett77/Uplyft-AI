@@ -27,23 +27,23 @@ Built for students, freshers, and career switchers who want real answers, not ge
 
 ## Features
 
-### 📄 Resume Analyzer
+### 📄 Resume Analyzer ---------------------------------------------
 - Parses PDF and DOCX resumes using `pdfreader`
 - Generates an **ATS score (0–100)** with breakdown across keywords, formatting, skills, and role match
 - Returns keyword gap analysis, format review checklist, and 5 prioritized improvement suggestions
 - All powered by **GPT-4o mini via OpenRouter**
 
-### 📊 Skill Gap Analysis
+### 📊 Skill Gap Analysis ------------------------------------------
 - Compares resume skills against target role requirements
 - Color-coded tags: **Present** (green) · **Missing** (red) · **Partial** (yellow)
 - Role compatibility score with match notes
 
-### 🗺️ Career Roadmap
+### 🗺️ Career Roadmap ----------------------------------------------
 - Auto-generates a **5-phase personalized roadmap** from your current skills to your target role
 - Each phase has a realistic timeframe, skill list, and status (Completed / In Progress / Upcoming)
 - Roadmap adapts based on your resume data — no two roadmaps are the same
 
-### 🎙️ AI Mock Interview
+### 🎙️ AI Mock Interview -------------------------------------------
 - **3 interview types**: Behavioral, Technical, Case Study
 - **7 questions per session**, generated fresh each time using full session history as context (no repetition)
 - Each answer gets: Score /10 · Strengths · Improvements · Model Answer · Actionable Tip
