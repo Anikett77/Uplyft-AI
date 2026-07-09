@@ -50,26 +50,26 @@ Built for students, freshers, and career switchers who want real answers, not ge
 - **2-minute timer per question** — auto-submits on timeout
 - Final **session report**: overall score, readiness label, strengths, improvements, per-question breakdown
 
-### 📚 Learning Tracker
+### 📚 Learning Tracker --------------------------------------------
 - Tracks active courses with module-by-module progress
 - Daily task checklist with streak and hours counter
 - **"Generate Learning Plan"** button maps your skill gaps to real courses (Coursera, Udemy, DeepLearning.AI, fast.ai, etc.)
 - All data persists across sessions via localStorage
 
-### 🐙 Portfolio Analyzer
+### 🐙 Portfolio Analyzer -----------------------------------------
 - Enter any GitHub username — no auth, no tokens required (uses GitHub public API)
 - Real stats: repositories, stars, forks, language breakdown by % usage
 - **Code quality signals** inferred from repo metadata: documentation rate, topic usage, community impact, activity
 - Recent activity feed from public events
 
-### ⚙️ Settings & Auth
+### ⚙️ Settings & Auth --------------------------------------------
 - JWT-based custom authentication (signup / login / logout)
 - Per-user data isolation — each user's resume, ATS results, GitHub data, and learning state stored separately
 - Profile management with live update to MongoDB
 
 ---
 
-## Tech Stack
+## Tech Stack ------------------------------------------------------
 
 | Layer | Technology |
 |---|---|
