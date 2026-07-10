@@ -85,7 +85,7 @@ Built for students, freshers, and career switchers who want real answers, not ge
 
 ---
 
-## Project Structure
+## Project Structure ----------------------------------------------
 
 ```
 uplyft-ai/
@@ -121,14 +121,14 @@ uplyft-ai/
 
 ---
 
-## Getting Started
+## Getting Started ------------------------------------------------
 
-### Prerequisites
+### Prerequisites -------------------------------------------------
 - Node.js 18+
 - MongoDB URI (local or Atlas)
 - OpenRouter API key → [openrouter.ai](https://openrouter.ai)
 
-### Installation
+### Installation --------------------------------------------------
 
 ```bash
 git clone https://github.com/Anikett77/uplyft-ai.git
@@ -136,7 +136,7 @@ cd uplyft-ai
 npm install
 ```
 
-### Environment Variables
+### Environment Variables -----------------------------------------
 
 Create a `.env.local` file:
 
@@ -150,7 +150,7 @@ NEXT_PUBLIC_URL=http://localhost:3000
 # GITHUB_TOKEN=your_github_personal_access_token
 ```
 
-### Run Locally
+### Run Locally ---------------------------------------------------
 
 ```bash
 npm run dev
@@ -160,7 +160,7 @@ Open [http://localhost:3000](http://localhost:3000)
 
 ---
 
-## How It Works
+## How It Works ---------------------------------------------------
 
 ```
 Upload Resume (PDF/DOCX)
