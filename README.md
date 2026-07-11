@@ -184,7 +184,7 @@ Every feature reads from the same parsed resume — upload once, everything pers
 
 ---
 
-## API Routes
+## API Routes -----------------------------------------------------
 
 | Method | Route | Description |
 |---|---|---|
@@ -200,7 +200,7 @@ Every feature reads from the same parsed resume — upload once, everything pers
 
 ---
 
-## Screenshots
+## Screenshots ----------------------------------------------------
 
 > Dashboard · Resume Analyzer · ATS Report · Mock Interview · Career Roadmap
 
@@ -213,7 +213,7 @@ Every feature reads from the same parsed resume — upload once, everything pers
 
 ---
 
-## Roadmap
+## Roadmap --------------------------------------------------------
 
 - [ ] Job recommendations via LinkedIn/Naukri scraping
 - [ ] AI Mentor Chat (persistent conversation)
@@ -223,7 +223,7 @@ Every feature reads from the same parsed resume — upload once, everything pers
 
 ---
 
-## Author
+## Author ---------------------------------------------------------
 
 **Aniket** — [@Anikett77](https://github.com/Anikett77)
 
@@ -231,6 +231,6 @@ If this helped you, leave a ⭐ — it means a lot and helps others find the pro
 
 ---
 
-## License
+## License --------------------------------------------------------
 
 MIT License — free to use, modify, and distribute.
