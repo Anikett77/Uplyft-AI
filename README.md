@@ -146,7 +146,7 @@ JWT_SECRET=your_jwt_secret_key
 OPENROUTER_API_KEY=your_openrouter_api_key
 NEXT_PUBLIC_URL=http://localhost:3000
 
-# Optional — increases GitHub API rate limit from 60/hr to 5000/hr
+# Optional — increases GitHub API rate limit from 60/hr to 5000/hr for many IDs access
 # GITHUB_TOKEN=your_github_personal_access_token
 ```
 
