@@ -250,7 +250,10 @@ export default function Resume() {
                 Resume <span style={{ background:"linear-gradient(135deg,#2dd4bf,#818cf8)",WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent" }}>Parsed</span>
               </h1>
             </div>
-            <button onClick={reset} style={{ fontSize:11,color:"rgba(255,255,255,0.25)",background:"rgba(255,255,255,0.05)",border:"1px solid rgba(255,255,255,0.09)",borderRadius:8,padding:"6px 14px",cursor:"pointer" }}>↩ Start over</button>
+            <div style={{ display: "flex", gap: "8px" }}>
+              <button onClick={() => import("@/utils/generateResumePDF").then(m => m.generateResumePDF(p))} style={{ fontSize:11,color:"#fff",background:"linear-gradient(135deg,#2dd4bf,#818cf8)",border:"none",borderRadius:8,padding:"6px 14px",cursor:"pointer",fontWeight:600 }}>↓ Export ATS PDF</button>
+              <button onClick={reset} style={{ fontSize:11,color:"rgba(255,255,255,0.25)",background:"rgba(255,255,255,0.05)",border:"1px solid rgba(255,255,255,0.09)",borderRadius:8,padding:"6px 14px",cursor:"pointer" }}>↩ Start over</button>
+            </div>
           </div>
 
           <div style={{ background:"rgba(255,255,255,0.03)",border:"1px solid rgba(255,255,255,0.08)",borderRadius:18,padding:"1.5rem",marginBottom:"1.25rem" }}>
@@ -331,7 +334,10 @@ export default function Resume() {
                 ATS <span style={{ background:"linear-gradient(135deg,#2dd4bf,#818cf8)",WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent" }}>Report</span>
               </h1>
             </div>
-            <button onClick={reset} style={{ fontSize:11,color:"rgba(255,255,255,0.25)",background:"rgba(255,255,255,0.05)",border:"1px solid rgba(255,255,255,0.09)",borderRadius:8,padding:"6px 14px",cursor:"pointer" }}>↩ New resume</button>
+            <div style={{ display: "flex", gap: "8px" }}>
+              <button onClick={() => import("@/utils/generateResumePDF").then(m => m.generateResumePDF(parsed))} style={{ fontSize:11,color:"#fff",background:"linear-gradient(135deg,#2dd4bf,#818cf8)",border:"none",borderRadius:8,padding:"6px 14px",cursor:"pointer",fontWeight:600 }}>↓ Export ATS PDF</button>
+              <button onClick={reset} style={{ fontSize:11,color:"rgba(255,255,255,0.25)",background:"rgba(255,255,255,0.05)",border:"1px solid rgba(255,255,255,0.09)",borderRadius:8,padding:"6px 14px",cursor:"pointer" }}>↩ New resume</button>
+            </div>
           </div>
 
           {/* Hero score */}
